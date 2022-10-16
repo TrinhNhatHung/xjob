@@ -1,0 +1,30 @@
+.App {
+    text-align: center;
+    font-family: 'XjobFonts';
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@font-face {
+    font-family: 'XjobFonts';
+    src: url('fonts/61388ce731b6f8e9486d7d78_rza-regular.woff2') format('woff2'), url('fonts/61388ce753bec1a84ad0500b_neue-montreal-medium.woff2') format('woff2'), url('fonts/TK3iWkUHHAIjg752GT8G.woff2') format('woff2')
+}

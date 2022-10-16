@@ -1,0 +1,82 @@
+#verifyPage {
+    padding-top: 95px;
+}
+
+#verifyPage .logo {
+    color: #14A800 !important;
+    font-size: 170%;
+    text-decoration: none;
+    position: fixed;
+    left: 2%;
+    top: 20px;
+}
+
+#controlVerify {
+    border: 1px solid #d5e0d5;
+    height: 500px;
+    width: 690px;
+    margin: auto;
+    margin-top: 45px;
+    border-radius: 10px;
+}
+
+#controlVerify .verifyIcon {
+    height: 130px;
+    width: 145px;
+    margin-top: 75px;
+}
+
+#controlVerify .title {
+    font-size: 1.5em;
+    font-family: sans-serif;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#controlVerify .message {
+    font-size: 0.85em;
+    color: #5e6d55;
+    font-weight: 100;
+    font-family: sans-serif;
+}
+
+#controlVerify .message .emailAddress {
+    font-weight: bold;
+}
+
+#controlVerify .btnGroup {
+    margin-top: 30px;
+}
+
+#controlVerify .btnGroup .redirectGmailInboxBtn {
+    background-color: #001e00;
+    color: #fff;
+    height: 38px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: transparent;
+    border-radius: 50px;
+    margin-left: 10px;
+}
+
+#controlVerify .btnGroup .redirectGmailInboxBtn a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#controlVerify .btnGroup .redirectGmailInboxBtn:hover {
+    background-color: hsl(120deg 100% 6% / 80%);
+}
+
+#controlVerify .btnGroup .resendBtn {
+    color: #001e00;
+    border: #001e00 1px solid;
+    border-radius: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 10px;
+}

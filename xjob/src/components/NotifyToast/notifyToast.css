@@ -1,0 +1,33 @@
+#notifyToast {
+    border: 1px solid #d5e0d5;
+    width: 70%;
+    margin: auto;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    color: grey;
+    height: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#notifyToast .successIcon {
+    font-size: 1.6em;
+    color: #14A800;
+    margin-right: 10px;
+}
+
+#notifyToast .errorIcon {
+    font-size: 1.6em;
+    color: #BB2D3B;
+    margin-right: 10px;
+}
+
+#notifyToast .warningIcon {
+    font-size: 1.6em;
+    color: #FFCA2C;
+    margin-right: 10px;
+}

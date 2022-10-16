@@ -1,0 +1,155 @@
+#selectRole {
+    border: 1px solid #d5e0d5;
+    height: 460px;
+    width: 690px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+}
+
+#signUpPage .logo {
+    color: #14A800 !important;
+    font-size: 170%;
+    text-decoration: none;
+    position: fixed;
+    left: 2%;
+    top: 20px;
+}
+
+#selectRole .selectRoleTitle {
+    display: inline-block;
+    font-size: 200%;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+#selectRole .roles .role {
+    background-color: #C7D6C7;
+    border-radius: 10px;
+    height: 165px;
+    width: 245px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+#selectRole .roles .role .roleIcon {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#selectRole .roles .client {
+    margin-right: 20px;
+}
+
+#selectRole .roles .freelancer {
+    margin-left: 20px;
+}
+
+#selectRole .roles .role .roleIcon {
+    height: 40px;
+}
+
+.creAccBtn {
+    color: #FFF;
+    background-color: #001E00;
+    width: 50%;
+    border-radius: 25px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+.creAccBtn:hover {
+    background-color: #334C33 !important;
+    color: #FFF !important;
+}
+
+.login {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.login span {
+    color: #8f8e8e;
+    margin-right: 5px;
+}
+
+.login a {
+    text-decoration: none;
+}
+
+.selectedRole {
+    background-color: #001E00 !important;
+    color: #FFF;
+}
+
+#signUpPageForm {
+    border: 1px solid #d5e0d5;
+    height: 500px;
+    width: 690px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#signUpPageForm .formTitle {
+    display: inline-block;
+    font-size: 200%;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.form-control {
+    border: 1px solid #d5e0d5;
+}
+
+.form-control::placeholder {
+    font-family: sans-serif;
+    font-size: 0.9em;
+}
+
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(255, 255, 255) inset;
+}
+
+#signUpPage .switchRole {
+    position: fixed;
+    right: 2%;
+    top: 20px;
+}
+
+#signUpPage .switchRole .text {
+    font-family: sans-serif;
+    font-size: 0.9em;
+    color: #5e6d55;
+}
+
+#signUpPage .switchRole .switchText {
+    font-family: sans-serif;
+    font-size: 0.9em;
+    text-decoration: underline;
+    color: #001e00;
+    cursor: pointer;
+}
+
+.errorSignup {
+    color: #9b211b;
+    font-size: 0.9em;
+    width: 100%;
+    text-align: left;
+}
+
+.errorSignup .errorSignupIcon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+#signUpPage .borderError {
+    border: 1.5px solid #9b211b;
+}
