@@ -48,4 +48,14 @@ public class UserService {
 		return false;
 	}
 	
+	@Transactional
+	public boolean updateVerifyCode (String uid, String verifyCode) {
+		return userDao.updateVerifyCode(uid, verifyCode);
+	}
+	
+	@Transactional
+	public boolean verifyEmail (String uid, String verifyCode) {
+		return userDao.updateVerifyStatus(uid, verifyCode);
+	}
+	
 }

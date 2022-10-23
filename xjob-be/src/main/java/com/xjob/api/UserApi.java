@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,7 +52,8 @@ public class UserApi {
 				data.put("role", user.getRole().getRoleName());
 				data.put("email", user.getEmail());
 				data.put("lastName", user.getLastName());
-				data.put("firstName", user.getLastName());		
+				data.put("firstName", user.getLastName());	
+				data.put("uid", user.getUid());
 				Map<String, Object> result = new HashMap<String, Object>();
 				result = ResponseUtil.createResponse(true, data, null);
 				return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
@@ -63,6 +65,38 @@ public class UserApi {
 			return new ResponseEntity<Object>(HttpStatus.FORBIDDEN);
 		}
 		
+	}
+	
+	@GetMapping("/remember-login")
+	public ResponseEntity<?> rememberLogin(){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			User user = userService.checkLogin(uid);
+			if (user != null) {
+				Map<String, Object> jwtClaim = new HashMap<>();
+				jwtClaim.put("uid", user.getUid());
+				jwtClaim.put("email", user.getEmail());
+				jwtClaim.put("password", user.getPassword());
+				String token = jwtUtil.createToken(jwtClaim);
+				
+				Map<String, Object> data = new HashMap<>();
+				data.put("token", token);
+				data.put("isAuthen", true);
+				data.put("role", user.getRole().getRoleName());
+				data.put("email", user.getEmail());
+				data.put("lastName", user.getLastName());
+				data.put("firstName", user.getLastName());	
+				data.put("uid", user.getUid());
+				Map<String, Object> result = new HashMap<String, Object>();
+				result = ResponseUtil.createResponse(true, data, null);
+				return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Object>(HttpStatus.FORBIDDEN);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.FORBIDDEN);
+		}
 	}
 	
 	@PostMapping("/signup")
@@ -109,7 +143,7 @@ public class UserApi {
 				data.put("isSuccess", false);
 				data.put("isAuthen", false);	
 				Map<String, Object> result = new HashMap<String, Object>();
-				result = ResponseUtil.createResponse(true, data, null);
+				result = ResponseUtil.createResponse(false, data, null);
 				return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
 			}
 		} catch (Exception e) {
@@ -117,5 +151,47 @@ public class UserApi {
 			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
+	}
+	
+	@PostMapping("/update-verify-code")
+	public ResponseEntity<?> updateVerifyCode (@RequestParam(name = "verifyCode") String verifyCode){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			boolean isUpdate = userService.updateVerifyCode(uid, verifyCode);
+			Map<String, Object> result = new HashMap<>();
+			Map<String, Object> data = new HashMap<>();
+			if (isUpdate) {
+				data.put("isUpdate", true);
+				result = ResponseUtil.createResponse(true, data, null);
+				return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
+			} else {
+				data.put("isUpdate", false);
+				result = ResponseUtil.createResponse(false, data, null);
+				return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/verify-email")
+	public ResponseEntity<?> verifyEmail (@RequestParam(name = "verifyCode") String  verifyCode){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			boolean isVerified = userService.verifyEmail(uid, verifyCode);
+			Map<String, Object> result = new HashMap<>();
+			Map<String, Object> data = new HashMap<>();
+			if (isVerified) {
+				data.put("isVerified", true);
+				result = ResponseUtil.createResponse(true, data, null);
+				return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
+			} else {
+				data.put("isVerified", false);
+				result = ResponseUtil.createResponse(false, data, null);
+				return new ResponseEntity<Map<String,Object>>(result, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

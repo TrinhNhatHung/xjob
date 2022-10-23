@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../app/firebase_config";
 import axiosClient from "../../api/axiosClient";
+import { useDispatch } from "react-redux";
+import {login} from '../../reducer/userSlice';
 
 function Login() {
   const inputEmailDiv = useRef();
@@ -19,6 +21,7 @@ function Login() {
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
   const requestCheckLogin = async (uid) => {
     let config = {
       method: "GET",
@@ -26,7 +29,16 @@ function Login() {
     };
     axiosClient(config)
       .then((response) => {
-        // todo
+        localStorage.setItem("token",response.data.token);
+        dispatch(login({
+          isAuthen: true,
+          uid,
+          lastName: response.data.lastName,
+          firstName: response.data.firstName,
+          avatarUrl: response.data.avatarUrl,
+          email:response.data.email,
+          token:response.data.token
+        }));
       })
       .catch((error) => {
         inputPasswordDiv.current.classList.add("borderError");
@@ -102,9 +114,14 @@ function Login() {
     });
   };
 
+  const handleRedirectToHome = (event)=> {
+    event.preventDefault();
+    navigate("/")
+  }
+
   return (
     <div id="loginPage">
-      <a className="logo" href="/">
+      <a className="logo" href="/" onClick={handleRedirectToHome}>
         XJob
       </a>
       <div id="selectAccount" className="d-flex flex-column align-items-center">
@@ -139,7 +156,7 @@ function Login() {
           </span>
           <div className="form-floating">
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="floatingInputGroup1"
               name="password"

@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,13 +48,18 @@ public class User {
 	
 	@Column(name = "verified")
 	private Boolean verified;
+	
+	@Column(name = "verify_code")
+	private String verifyCode;
 
 	@CreationTimestamp
 	@Column(name = "create_at")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime createAt;
 	
 	@UpdateTimestamp
 	@Column(name = "update_at")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime updateAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

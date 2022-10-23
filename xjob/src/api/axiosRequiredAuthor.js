@@ -10,9 +10,9 @@ const axiosRequiredAuthor = axios.create({
 });
 
 axiosRequiredAuthor.interceptors.request.use(async (config)=> {
-    let tokenJwt = localStorage.getItem("tokenJwt");
-    if (tokenJwt){
-        config.headers.Authorization = `Bearer ${tokenJwt}`;
+    let token = localStorage.getItem("token");
+    if (token){
+        config.headers.Authorization = `Bearer ${token}`;
     }
 
     return config;

@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import user from '../reducer/userSlice';
+import detailJobDrawer from '../reducer/detailJobDrawer';
 
 const rootReducer = {
-    user
+    user,
+    detailJobDrawer
 };
 
 const store = configureStore({

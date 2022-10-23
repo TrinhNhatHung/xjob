@@ -10,6 +10,8 @@ import BusinessConst from "../../app/constant";
 import ErrorIcon from "@mui/icons-material/Error";
 import { useDispatch } from "react-redux";
 import {signup} from '../../reducer/userSlice';
+import randomCode from '../../util/RandomCode';
+import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
 
 function Signup() {
   const navigate = useNavigate();
@@ -147,15 +149,28 @@ function Signup() {
           })
           .then(function (response) {
             if (response.data.isSuccess){
+              localStorage.setItem("token",response.data.token);
               dispatch(signup({
                 isAuthen: true,
                 uid:response.data.uid,
                 lastName:response.data.lastName,
                 firstName: response.data.firstName,
                 email: response.data.email,
-                avatarUrl: response.data.avatarUrl
+                avatarUrl: response.data.avatarUrl,
+                token:response.data.token
               }))
-              auth.currentUser.sendEmailVerification().then(()=>{
+              let verifyCode = randomCode(5);
+              axiosRequiredAuthor.post("/user/update-verify-code",null,{
+                params: {
+                  verifyCode: verifyCode
+                }
+              }).catch(()=>{});
+              let origin = window.location.origin;
+              let actionCodeSetting = {
+                url: `${origin}/verify-success?verifyCode=${verifyCode}`,
+                handleCodeInApp: true
+              };
+              auth.currentUser.sendEmailVerification(actionCodeSetting).then(()=>{
               }).catch(()=>{
               });  
               navigate("/signup/verify-email");
@@ -194,12 +209,17 @@ function Signup() {
     }
   };
 
+  const handleRedirectToHome = (event)=> {
+    event.preventDefault();
+    navigate("/")
+  }
+
   const [kind, setKind] = useState("SELECTED_ROLE");
   const renderPage = () => {
     if (kind === "SELECTED_ROLE") {
       return (
         <div id="signUpPage">
-          <a className="logo" href="/">
+          <a className="logo" href="/" onClick={handleRedirectToHome}>
             XJob
           </a>
           <div id="selectRole">
@@ -249,7 +269,7 @@ function Signup() {
       }
       return (
         <div id="signUpPage">
-          <a className="logo" href="/">
+          <a className="logo" href="/" onClick={handleRedirectToHome}>
             XJob
           </a>
           <div className="switchRole">

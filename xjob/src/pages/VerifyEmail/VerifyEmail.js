@@ -34,9 +34,14 @@ function VerifyEmail() {
     message: null
   })
 
+  const handleRedirectToHome = (event)=> {
+    event.preventDefault();
+    navigate("/")
+  }
+
   return (
     <div id="verifyPage">
-      <a className="logo" href="/">
+      <a className="logo" href="/" onClick={handleRedirectToHome}>
         XJob
       </a>
       {

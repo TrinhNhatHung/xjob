@@ -1,0 +1,34 @@
+#post {
+    border-bottom: 1px solid #d5e0d5;
+    text-align: left;
+    font-family: sans-serif;
+    padding: 28px 25px;
+}
+
+#post:hover {
+    background-color: #F2F7F2;
+}
+
+#post .postTitle {
+    font-size: 1em;
+    color: #272c25;
+    margin-bottom: 20px;
+}
+
+#post .info {
+    font-size: 0.8em;
+    color: #767c73;
+    margin-bottom: 10px;
+}
+
+#post .jd {
+    font-size: 0.9em;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+#post .skills .skill {
+    margin-bottom: 10px;
+    margin-right: 5px;
+    background-color: #D5E0D5;
+}

@@ -1,0 +1,66 @@
+#detailJobDrawer .drawer {
+    width: 1020px;
+}
+
+#detailJobDrawer .drawerPaper {
+    width: 700px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#detailJobDrawer .content {
+    border: 1px solid #d5e0d5;
+    width: 90%;
+    margin: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 80px;
+    padding: 20px 0px;
+}
+
+#detailJobDrawer .content .detailJobDrawerTitle {
+    padding: 20px 25px;
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: rgb(44, 44, 44);
+}
+
+#detailJobDrawer .content .detailJobDrawerDetail {
+    padding: 20px 25px;
+    border-bottom: 1px solid #d5e0d5;
+    font-size: 0.95em;
+}
+
+#detailJobDrawer .content .detailJobDrawerInfo {
+    padding: 20px 25px;
+    border-bottom: 1px solid #d5e0d5;
+    --bs-gutter-x: 0
+}
+
+#detailJobDrawer .content .detailJobDrawerInfo .col-4 .icon {
+    font-size: 1.1em;
+    margin-right: 8px;
+    margin-top: 2px;
+}
+
+#detailJobDrawer .content .detailJobDrawerInfo .col-4 .detailJobDrawerInfoText {
+    color: rgb(44, 44, 44);
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+#detailJobDrawer .content .detailJobDrawerInfo .col-4 .detailJobDrawerInfoLabel {
+    font-size: 0.9em;
+}
+
+#detailJobDrawer .content .skills {
+    padding: 20px 25px;
+}
+
+#detailJobDrawer .content .skillsTitle {
+    font-weight: bold;
+    color: rgb(44, 44, 44);
+    font-family: sans-serif;
+    margin-bottom: 20px;
+}

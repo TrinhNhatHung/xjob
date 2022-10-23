@@ -55,3 +55,13 @@
 #header .headerRight .signUpBtn:hover {
     background-color: #334b33;
 }
+
+#header .headerRight .headerIcon {
+    height: 30px;
+    width: 30px;
+    color: #001e00;
+}
+
+#header .headerRight .btnIcon {
+    margin-left: 25px;
+}

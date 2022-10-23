@@ -21,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private Filter filter;
-
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -38,7 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.authorizeRequests().antMatchers("/**").permitAll().anyRequest().authenticated();
+		http.authorizeRequests()
+				.antMatchers("/user/verify-email","/user/update-verify-code","/job/job-by-author").authenticated()
+				.antMatchers("/**").permitAll();
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 		http.cors();
 	}
