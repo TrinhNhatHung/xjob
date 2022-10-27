@@ -1,0 +1,50 @@
+#yourPost {
+    border-bottom: 1px solid #d5e0d5;
+    text-align: left;
+    font-family: sans-serif;
+    padding: 28px 25px;
+}
+
+#yourPost:hover {
+    background-color: #F2F7F2;
+}
+
+#yourPost .yourPostTitle {
+    font-size: 1.2em;
+    color: #272c25;
+    margin-bottom: 10px;
+}
+
+#yourPost .yourPostTitle a {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #272c25;
+    display: block;
+}
+
+#yourPost .yourPostTitle a:hover {
+    text-decoration: underline;
+}
+
+#yourPost .info {
+    font-size: 0.9em;
+    color: #767c73;
+    margin-bottom: 10px;
+}
+
+#yourPost .proposals {
+    margin-right: 50px;
+}
+
+#yourPost .proposals .proposalInfo {
+    margin-left: 50px;
+}
+
+#yourPost .proposals .proposalInfo .value {
+    font-size: 1em;
+}
+
+#yourPost .proposals .proposalInfo .label {
+    font-size: 0.9em;
+    color: #767c73;
+}

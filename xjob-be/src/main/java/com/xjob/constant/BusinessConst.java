@@ -14,4 +14,7 @@ public class BusinessConst {
 	
 	public static final String TERM_CLASS_DAY = "4";
 	
+	public static final String PROPOSAL_PROPOSAL = "1";
+	
+	public static final String PROPOSAL_HIRED = "2";
 }

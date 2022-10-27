@@ -13,6 +13,7 @@ import axiosRequiredAuthor from "./api/axiosRequiredAuthor";
 import { useDispatch } from "react-redux";
 import {login} from "./reducer/userSlice";
 import FindWork from "./pages/FindWork/FindWork";
+import Applicants from "./pages/Applicants/Applicants";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
             <Route path="/find-work" element={<FindWork />} />
             <Route path="/client/dashboard" element={<ClientDashboard />} />
             <Route path="/verify-success" element={<VerifySuccess />} />
+            <Route path={`/applicants/:jobId/applicants`} element={<Applicants />} />
           </Routes>
         </div>
       </BrowserRouter>

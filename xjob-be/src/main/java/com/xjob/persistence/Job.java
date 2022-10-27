@@ -87,4 +87,7 @@ public class Job {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
 	private List<JobSkill> jobSkills;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
+	private List<Proposal> proposals;
+	
 }

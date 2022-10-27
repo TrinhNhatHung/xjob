@@ -12,7 +12,7 @@ function FindWork() {
   const navigate = useNavigate();
   useEffect(() => {
     axiosRequiredAuthor
-      .get(`/job/jobs?limit=2&page=${page}`)
+      .get(`/job/jobs?limit=10&page=${page}`)
       .then((response) => {
         let newPost = [];
         newPost = newPost.concat(posts);

@@ -7,8 +7,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.xjob.constant.BusinessConst;
 import com.xjob.persistence.Job;
 import com.xjob.persistence.JobSkill;
+import com.xjob.persistence.Proposal;
 
 @Component
 public class JobResponse {
@@ -35,6 +37,15 @@ public class JobResponse {
 				skills.add(jobSkill.getSkill().getSkillName());
 			}
 			jobMap.put("skills", skills);
+			List<Proposal> proposals = job.getProposals();
+			long proposalCount = proposals.stream()
+					.filter(proposal -> BusinessConst.PROPOSAL_PROPOSAL.equals(proposal.getProposalId().getKind()))
+					.count();
+			jobMap.put("proposals", proposalCount);
+			long hiredCount = proposals.stream()
+					.filter(proposal -> BusinessConst.PROPOSAL_HIRED.equals(proposal.getProposalId().getKind()))
+					.count();
+			jobMap.put("hired", hiredCount);
 			jobMapList.add(jobMap);
 		}
 		return jobMapList;
