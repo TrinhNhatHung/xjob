@@ -14,6 +14,8 @@ import { useDispatch } from "react-redux";
 import {login} from "./reducer/userSlice";
 import FindWork from "./pages/FindWork/FindWork";
 import Applicants from "./pages/Applicants/Applicants";
+import JobDetail from "./pages/JobDetail/JobDetail";
+import JobPost from "./pages/JobPost/JobPost";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +51,8 @@ function App() {
             <Route path="/client/dashboard" element={<ClientDashboard />} />
             <Route path="/verify-success" element={<VerifySuccess />} />
             <Route path={`/applicants/:jobId/applicants`} element={<Applicants />} />
+            <Route path={`/applicants/:jobId/job-detail`} element={<JobDetail />} />
+            <Route path={`/job-post`} element={<JobPost />} />
           </Routes>
         </div>
       </BrowserRouter>

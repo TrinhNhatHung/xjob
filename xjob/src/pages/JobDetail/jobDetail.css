@@ -1,0 +1,84 @@
+#jobDetailPage .jobDetail {
+    border: 1px solid #d5e0d5;
+    width: 60%;
+    margin: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 80px;
+    text-align: left;
+    font-family: sans-serif;
+}
+
+#jobDetailPage .jobDetail .detailJobTitle {
+    padding: 5px 25px;
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: rgb(44, 44, 44);
+}
+
+#jobDetailPage .jobDetail .detailJobDetail {
+    padding: 15px 25px;
+    border-bottom: 1px solid #d5e0d5;
+    font-size: 0.95em;
+}
+
+#jobDetailPage .jobDetail .jobDetailInfo {
+    padding: 20px 25px;
+    border-bottom: 1px solid #d5e0d5;
+    --bs-gutter-x: 0
+}
+
+#jobDetailPage .jobDetail .jobDetailInfo .col-4 .icon {
+    font-size: 1.1em;
+    margin-right: 8px;
+    margin-top: 2px;
+}
+
+#jobDetailPage .jobDetail .jobDetailInfo .col-4 .jobDetailInfoText {
+    color: rgb(44, 44, 44);
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+#jobDetailPage .jobDetail .jobDetailInfo .col-4 .jobDetailInfoLabel {
+    font-size: 0.9em;
+}
+
+#jobDetailPage .jobDetail .skills {
+    padding: 20px 25px;
+}
+
+#jobDetailPage .jobDetail .skills .skillsTitle {
+    font-weight: bold;
+    color: rgb(44, 44, 44);
+    font-family: sans-serif;
+    margin-bottom: 20px;
+}
+
+#jobDetailPage .jobDetail .skills .skill {
+    margin-right: 10px;
+    background-color: #D5E0D5;
+    margin-bottom: 10px;
+}
+
+#jobDetailPage .jobDetail .jobActions {
+    width: 25%;
+    border-left: 1px solid #d5e0d5;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+#jobDetailPage .jobDetail .jobActions .jobAction .actionIcon {
+    font-size: 1em;
+    margin-right: 5px;
+}
+
+#jobDetailPage .jobDetail .jobActions .jobAction .actionText {
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+#jobDetailPage .jobDetail .jobActions .jobAction .actionText:hover {
+    text-decoration: underline;
+}

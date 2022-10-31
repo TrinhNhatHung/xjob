@@ -77,3 +77,14 @@
 #clientDashboardPage .yourPosts .postJobBtn:hover {
     background-color: #3C8224;
 }
+
+#clientDashboardPage .title .postJobBtn {
+    background-color: #14a800;
+    color: #fff;
+    width: 130px;
+    border-radius: 50px;
+}
+
+#clientDashboardPage .title .postJobBtn:hover {
+    background-color: #3C8224;
+}

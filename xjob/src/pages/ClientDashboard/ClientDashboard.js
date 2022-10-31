@@ -30,7 +30,7 @@ function ClientDashboard() {
   };
 
   const postJob = ()=> {
-
+    navigate("/job-post");
   }
 
   const renderYourPosts = () => {
@@ -64,7 +64,10 @@ function ClientDashboard() {
   };
   return (
     <div id="clientDashboardPage">
-      <div className="title">Your Dashboard</div>
+      <div className="title d-flex flex-row justify-content-between">
+        <span>Your Dashboard</span>
+        <button className="btn postJobBtn" onClick={postJob}>Post a Job</button>
+      </div>
       {renderYourPosts()}
     </div>
   );

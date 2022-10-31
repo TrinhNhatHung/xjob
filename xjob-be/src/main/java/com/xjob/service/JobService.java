@@ -39,4 +39,8 @@ public class JobService {
 		}
 		return jobDao.get(limit, page);
 	}
+	
+	public Job getByIdAndUid(Integer jobId, String uid) {
+		return jobDao.getByIdAndUid(jobId, uid);
+	}
 }

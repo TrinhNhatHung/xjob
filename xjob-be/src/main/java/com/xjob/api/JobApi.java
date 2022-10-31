@@ -62,4 +62,25 @@ public class JobApi {
 			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/job-detail")
+	public ResponseEntity<?> getJobDetail(@RequestParam(name = "jobId") Integer jobId){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			Job job = jobService.getByIdAndUid(jobId, uid);
+			if (job == null) {
+				Map<String, Object> result = new HashMap<>();
+				result.put("job", null);
+				return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+			} else {
+				Map<String, Object> data = jobResponse.responseJob(job);
+				Map<String, Object> result = new HashMap<>();
+				result.put("job", data);
+				return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
