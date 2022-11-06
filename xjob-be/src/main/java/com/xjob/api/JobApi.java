@@ -10,11 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xjob.persistence.Job;
+import com.xjob.persistence.User;
 import com.xjob.response.JobResponse;
 import com.xjob.service.JobService;
 import com.xjob.util.ResponseUtil;
@@ -78,6 +80,42 @@ public class JobApi {
 				result.put("job", data);
 				return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/post-job")
+	public ResponseEntity<?> postJob(@RequestParam(name = "title") String title,
+			@RequestParam(name = "detail") String detail,
+			@RequestParam(name = "skills") List<String> skills,
+			@RequestParam(name = "paymentKind") String paymentKind,
+			@RequestParam(name = "price") Integer price,
+			@RequestParam(name = "termClass", required = false) String termClass,
+			@RequestParam(name = "termFrom", required = false) Integer termFrom,
+			@RequestParam(name = "termTo", required = false) Integer termTo,
+			@RequestParam(name = "hourPerWeek", required = false) Integer hourPerWeek){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			Job job = new Job();
+			job.setTitle(title);
+			job.setDetail(detail);
+			job.setPaymentKind(paymentKind);
+			job.setPrice(price);
+			job.setTermClass(termClass);
+			job.setTermFrom(termFrom);
+			job.setTermTo(termTo);
+			job.setHourPerWeek(hourPerWeek);
+			job.setHireAmount(0);
+			job.setHiredAmount(0);
+			User user = new User();
+			user.setUid(uid);
+			job.setAuthorId(user);
+			Integer insertedJobId = jobService.postjob(job, skills);
+			Map<String, Object> result = new HashMap<>();
+			result.put("jobId", insertedJobId);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);

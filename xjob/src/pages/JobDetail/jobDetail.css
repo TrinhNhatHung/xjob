@@ -9,6 +9,10 @@
     font-family: sans-serif;
 }
 
+#jobDetailPage .jobDetail .jobDetailContent {
+    width: 75%;
+}
+
 #jobDetailPage .jobDetail .detailJobTitle {
     padding: 5px 25px;
     font-size: 1.4em;

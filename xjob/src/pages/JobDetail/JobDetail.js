@@ -88,7 +88,7 @@ function JobDetail() {
     <div id="jobDetailPage">
       <ApplicantHeader jobId={jobId} />
       <div className="jobDetail d-flex flex-row">
-        <div>
+        <div className="jobDetailContent">
           <div className="detailJobTitle">{job.title}</div>
           <div className="detailJobDetail">{job.detail}</div>
           {renderPostInfo()}

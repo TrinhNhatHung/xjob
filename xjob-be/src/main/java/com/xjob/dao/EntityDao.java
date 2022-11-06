@@ -33,7 +33,7 @@ public class EntityDao<T> {
 		getCurrentSession().saveOrUpdate(t);
 	}
 	
-	public void insert(T t) {
-		getCurrentSession().save(t);
+	public Serializable insert(T t) {
+		return getCurrentSession().save(t);
 	}
 }
