@@ -2,9 +2,15 @@ import React from 'react';
 import './proposal.css';
 import Avatar from '@material-ui/core/Avatar';
 import { Chip } from '@material-ui/core';
+import {htmlToInlineText} from "../../util/HtmlTagUtil";
 
 function Proposal(props) {
-    const  avatarStr = props.proposal.firstName.charAt(0) + props.proposal.lastName.charAt(0);
+    const avatarStr = props.proposal.firstName.charAt(0) + props.proposal.lastName.charAt(0);
+    var letter = "";
+    if (props.proposal.letter !== null && props.proposal.letter !== undefined){
+        letter = htmlToInlineText(props.proposal.letter);
+    }
+    
     return (
         <div id="proposal" className="d-flex flex-row">
             <Avatar className="proposalAvatar">{avatarStr}</Avatar>
@@ -17,7 +23,7 @@ function Proposal(props) {
                     </div>
                 </div>
                 <div className="letter">
-                    <b>Cover letter</b> - {props.proposal.letter}
+                    <b>Cover letter</b> - {letter}
                 </div>
                 <div className="skills">
                     {

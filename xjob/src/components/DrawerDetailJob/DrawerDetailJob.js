@@ -9,6 +9,7 @@ import SellIcon from '@mui/icons-material/Sell';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import {openDialog} from "../../reducer/proposalDialog";
 
 function DrawerDetailJob(props) {
   const detailJobDrawer = useSelector((state) => state.detailJobDrawer);
@@ -27,6 +28,11 @@ function DrawerDetailJob(props) {
     document.addEventListener("keydown", keyDown);
     return () => document.removeEventListener("keydown", keyDown);
   }, [keyDown]);
+
+  const submitProposal = (event)=> {
+    event.stopPropagation();
+    dispatch(openDialog());
+  }
 
   const renderPostInfo = () => {
     let hourPerWeek = detailJobDrawer.post.hourPerWeek;
@@ -91,9 +97,11 @@ function DrawerDetailJob(props) {
         }}
       >
         <div className="content">
-          <div className="detailJobDrawerTitle">{detailJobDrawer.post.title}</div>
-          <div className="detailJobDrawerDetail">
-            {detailJobDrawer.post.detail}
+          <div className="detailJobDrawerTitle d-flex justify-content-between">
+            <span>{detailJobDrawer.post.title}</span>
+            <button className="btn btnSubmitProposal" onClick={submitProposal}>Submit a Proposal</button>
+          </div>
+          <div className="detailJobDrawerDetail" dangerouslySetInnerHTML={{__html: detailJobDrawer.post.detail}}>
           </div>
           {
             renderPostInfo()

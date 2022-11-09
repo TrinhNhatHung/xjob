@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 import Header from "./components/Header/Header";
 import Signup from "./pages/SignUp/Signup";
 import Login from "./pages/Login/Login";
@@ -16,6 +17,7 @@ import FindWork from "./pages/FindWork/FindWork";
 import Applicants from "./pages/Applicants/Applicants";
 import JobDetail from "./pages/JobDetail/JobDetail";
 import JobPost from "./pages/JobPost/JobPost";
+import ProposalDialog from "./components/ProposalDialog/ProposalDialog";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +32,8 @@ function App() {
         firstName: response.data.firstName,
         avatarUrl: response.data.avatarUrl,
         email:response.data.email,
-        token:response.data.token
+        token:response.data.token,
+        role:response.data.role
       }));
     })
     .catch(()=>{});
@@ -56,6 +59,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+      <ProposalDialog/>
     </div>
   );
 }

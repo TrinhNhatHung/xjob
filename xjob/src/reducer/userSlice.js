@@ -7,7 +7,8 @@ const initUser = {
     lastName: null,
     firstName: null,
     email:null,
-    token: null
+    token: null,
+    role: null
 }
 
 const user = createSlice({
@@ -22,6 +23,7 @@ const user = createSlice({
             state.avatarUrl = action.payload.avatarUrl;
             state.email = action.payload.email;
             state.token = action.payload.token;
+            state.role = action.payload.role;
         },
         logout(state) {
             state.isAuthen = false;
@@ -30,6 +32,7 @@ const user = createSlice({
             state.firstName = null;
             state.avatarUrl = null;
             state.email = null;
+            state.role = null;
         },
         signup(state,action){
             state.isAuthen = true;
@@ -39,6 +42,7 @@ const user = createSlice({
             state.avatarUrl = action.payload.avatarUrl;
             state.email = action.payload.email;
             state.token = action.payload.token;
+            state.role = action.payload.role;
         }
     }
 });

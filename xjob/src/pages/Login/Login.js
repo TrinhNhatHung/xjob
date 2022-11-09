@@ -9,6 +9,7 @@ import { auth } from "../../app/firebase_config";
 import axiosClient from "../../api/axiosClient";
 import { useDispatch } from "react-redux";
 import {login} from '../../reducer/userSlice';
+import {BusinessConst} from "../../constant/BusinessConst";
 
 function Login() {
   const inputEmailDiv = useRef();
@@ -37,8 +38,14 @@ function Login() {
           firstName: response.data.firstName,
           avatarUrl: response.data.avatarUrl,
           email:response.data.email,
-          token:response.data.token
+          token:response.data.token,
+          role: response.data.role
         }));
+        if (response.data.role === BusinessConst.ROLE_CLIENT){
+          navigate("/client/dashboard");
+        } else {
+          navigate("/find-work");
+        }
       })
       .catch((error) => {
         inputPasswordDiv.current.classList.add("borderError");

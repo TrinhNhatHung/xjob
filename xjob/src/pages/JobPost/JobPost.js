@@ -10,6 +10,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { useNavigate } from "react-router";
 import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
 import NotifyToast from "../../components/NotifyToast/NotifyToast";
+import {textToHtml} from "../../util/HtmlTagUtil";
 
 function JobPost() {
   const [skills, setSkills] = useState([]);
@@ -234,7 +235,7 @@ function JobPost() {
     if (validate) {
       var formData = new FormData();
       formData.append("title", input.title);
-      formData.append("detail", input.detail);
+      formData.append("detail", textToHtml(input.detail));
       formData.append("paymentKind", input.paymentKind);
       formData.append("price", input.price);
       if (input.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY) {

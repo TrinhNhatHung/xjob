@@ -68,7 +68,7 @@ function FindWork() {
                 info={
                   calInfoOfPost(post)
                 }
-                jd={post.detail}
+                detail={post.detail}
                 skills={post.skills}
                 post={post}
               />
@@ -91,7 +91,7 @@ function FindWork() {
   };
     return (
         <div id="findWorkPage">
-            <div className="title">To do</div>
+            {/* <div className="title">To do</div> */}
             {renderYourPosts()}
         </div>
     );

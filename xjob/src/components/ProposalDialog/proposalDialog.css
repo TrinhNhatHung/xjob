@@ -1,0 +1,51 @@
+.proposalForm {
+    width: 45%;
+    padding: 20px 20px;
+}
+
+.proposalForm .form-item .form-item-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.proposalForm .form-item .form-item-input {
+    border: 2px solid #d5e0d5;
+    border-radius: 5px;
+    height: 150px;
+    outline: none;
+    padding: 4px 10px;
+    font-size: 0.95em;
+}
+
+.proposalForm .form-item .error {
+    color: #9b211b;
+    font-size: 0.95em;
+}
+
+.proposalForm .form-item .form-item-input.borderError {
+    border: 1.5px solid #9b211b;
+}
+
+.proposalForm .btnSubmit {
+    background-color: #14a800;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.proposalForm .btnSubmit:hover {
+    color: #fff;
+    background-color: #0f8300;
+}
+
+.proposalForm .btn {
+    padding: 4px 15px;
+}
+
+.proposalForm .btnCancel {
+    color: #14a800;
+}
+
+.proposalForm .btnCancel:hover {
+    color: #0f8300;
+}

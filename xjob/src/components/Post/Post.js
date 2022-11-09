@@ -12,11 +12,12 @@ function Post(props) {
       post: props.post
     }));
   }
+
   return (
     <div id="post" className="d-flex flex-column align-items-start" onClick={toggleJobDetail}>
       <span className="postTitle">{props.title}</span>
       <div className="info">{props.info}</div>
-      <div className="jd">{props.jd}</div>
+      <div className="jd" dangerouslySetInnerHTML={{__html:props.detail}}></div>
       <div className="skills">
         {
             props.skills.map((skill,index)=> {

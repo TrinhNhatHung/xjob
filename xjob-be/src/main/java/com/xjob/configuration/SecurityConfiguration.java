@@ -40,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests()
 				.antMatchers("/job/post-job").hasRole("CLIENT")
+				.antMatchers("/proposal/post-proposal").hasRole("FREELANCER")
 				.antMatchers("/user/verify-email","/user/update-verify-code","/job/job-by-author").authenticated()
 				.antMatchers("/**").permitAll();
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

@@ -17,4 +17,5 @@ public class ProposalDao extends EntityDao<Proposal>{
 					.setParameterList("kinds", kinds);
 		return query.getResultList();
 	}
+	
 }

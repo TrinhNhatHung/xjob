@@ -65,3 +65,43 @@
 #header .headerRight .btnIcon {
     margin-left: 25px;
 }
+
+#header .headerRight .dropdown .dropdown-menu {
+    font-family: sans-serif;
+    font-size: 0.95em;
+    width: 220px;
+}
+
+#header .headerRight .dropdown .dropdown-menu .avatar {
+    margin: auto;
+    height: 70px;
+    width: 70px;
+    margin-top: 20px;
+}
+
+#header .headerRight .dropdown .dropdown-menu .userName {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: 15px;
+    color: rgb(44, 44, 44);
+}
+
+#header .headerRight .dropdown .dropdown-menu .role {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: rgb(44, 44, 44);
+}
+
+#header .headerRight .dropdown .dropdown-menu .dropdown-item {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+#header .headerRight .dropdown .dropdown-menu .dropdown-item:hover {
+    background-color: #F2F7F2;
+}

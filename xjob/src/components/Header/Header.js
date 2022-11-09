@@ -5,6 +5,7 @@ import "./Header.css";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Badge } from "@mui/material";
+import Avatar from '@material-ui/core/Avatar';
 
 function Header() {
   const user = useSelector((state) => state.user);
@@ -25,14 +26,54 @@ function Header() {
     navigate("/");
   };
 
+  const redirectToSettings = (event)=> {
+    event.preventDefault();
+    navigate("/info");
+  }  
+
+  const logOut = (event)=> {
+    event.preventDefault();
+    // todo
+  } 
+
+  const getRoleFromResponseStr = ()=> {
+    if (user.role !== null && user.role !== undefined){
+      let result = user.role.substr(5).toLowerCase();
+      result = result.charAt(0).toUpperCase() + result.substr(1);
+      return result;
+    }
+  }
+
   const renderHeaderRight = () => {
-    if (user.isAuthen){
+    if (user.isAuthen) {
       return (
         <ul className="headerRight nav">
           <Badge className={"btnIcon"} badgeContent={""} color="error">
             <NotificationsNoneIcon className="headerIcon" fontSize="small" />
           </Badge>
-          <AccountCircleOutlinedIcon className="btnIcon headerIcon" fontSize="small"/>
+          <div className="dropdown">
+            <AccountCircleOutlinedIcon
+              className="btnIcon headerIcon dropdown-toggle"
+              data-bs-toggle="dropdown" 
+              aria-expanded="false"
+              fontSize="small"
+            />
+            <ul className="dropdown-menu">
+              <Avatar className="avatar"/>
+              <span className="userName">{user.firstName + " " + user.lastName}</span>
+              <span className="role">{getRoleFromResponseStr()}</span>
+              <li className="dropdown-item-li">
+                <a className="dropdown-item" href="/info" onClick={redirectToSettings}>
+                  Settings
+                </a>
+              </li>
+              <li className="dropdown-item-li">
+                <a className="dropdown-item" href="/" onClick={logOut}>
+                  Log out
+                </a>
+              </li>
+            </ul>
+          </div>
         </ul>
       );
     } else {
@@ -53,7 +94,6 @@ function Header() {
         </ul>
       );
     }
-    
   };
 
   const render = () => {
@@ -81,9 +121,7 @@ function Header() {
               </a>
             </li>
           </ul>
-          {
-            renderHeaderRight()
-          }
+          {renderHeaderRight()}
         </div>
       );
     } else {

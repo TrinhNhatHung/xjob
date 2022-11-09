@@ -90,7 +90,7 @@ function JobDetail() {
       <div className="jobDetail d-flex flex-row">
         <div className="jobDetailContent">
           <div className="detailJobTitle">{job.title}</div>
-          <div className="detailJobDetail">{job.detail}</div>
+          <div className="detailJobDetail" dangerouslySetInnerHTML={{__html: job.detail}}></div>
           {renderPostInfo()}
           <div className="skills d-flex flex-column">
             <span className="skillsTitle">Skills</span>

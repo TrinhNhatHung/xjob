@@ -157,7 +157,8 @@ function Signup() {
                 firstName: response.data.firstName,
                 email: response.data.email,
                 avatarUrl: response.data.avatarUrl,
-                token:response.data.token
+                token:response.data.token,
+                role:response.data.role
               }))
               let verifyCode = randomCode(5);
               axiosRequiredAuthor.post("/user/update-verify-code",null,{
