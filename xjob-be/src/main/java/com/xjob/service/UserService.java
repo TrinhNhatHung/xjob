@@ -13,6 +13,10 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	public User getById(String uid) {
+		return userDao.getById(User.class, uid);
+	}
+	
 	public User checkLogin(String uid) {
 		User user = userDao.getById(User.class, uid);
 		if (user == null) {
@@ -56,6 +60,11 @@ public class UserService {
 	@Transactional
 	public boolean verifyEmail (String uid, String verifyCode) {
 		return userDao.updateVerifyStatus(uid, verifyCode);
+	}
+	
+	@Transactional
+	public void updateFreelancerInfo(User user) {
+		userDao.updateFreelancerInfo(user);
 	}
 	
 }

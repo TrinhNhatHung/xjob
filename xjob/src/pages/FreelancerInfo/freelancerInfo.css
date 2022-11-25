@@ -1,0 +1,126 @@
+#freelancerInfoPage .freelancerBackground {
+    border: 1px solid #d5e0d5;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    text-align: left;
+}
+
+#freelancerInfoPage .freelancerBackground .header {
+    padding: 25px 20px;
+}
+
+#freelancerInfoPage .freelancerBackground .header .avatar {
+    margin-right: 30px;
+}
+
+#freelancerInfoPage .freelancerBackground .header .avatar .img {
+    height: 60px;
+    width: 60px;
+}
+
+#freelancerInfoPage .freelancerBackground .header .name .text {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: rgb(44, 44, 44);
+    margin-right: 10px;
+}
+
+#freelancerInfoPage .freelancerBackground .left {
+    width: 25%;
+}
+
+#freelancerInfoPage .freelancerBackground .left .element {
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+#freelancerInfoPage .freelancerBackground .left .element .title .text {
+    font-weight: bold;
+    color: rgb(44, 44, 44);
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+
+#freelancerInfoPage .freelancerBackground .left .element .content {
+    font-size: 0.9em;
+    color: gray;
+}
+
+#freelancerInfoPage .freelancerBackground .right {
+    width: 75%;
+    border-left: 1px solid #d5e0d5;
+}
+
+#freelancerInfoPage .freelancerBackground .right .element {
+    border-bottom: 1px solid #d5e0d5;
+    padding: 25px 20px;
+}
+
+#freelancerInfoPage .freelancerBackground .right .element .title .text {
+    font-weight: bold;
+    color: rgb(44, 44, 44);
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+#freelancerInfoPage .freelancerBackground .right .intro .introduce {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#freelancerInfoPage .freelancerBackground .right .intro .introduce .text {
+    width: calc(100% - 40px);
+}
+
+#freelancerInfoPage .freelancerBackground .right .skills .skillChips {
+    margin-top: 25px;
+}
+
+#freelancerInfoPage .freelancerBackground .right .skills .skillChips .skillChip {
+    margin-right: 10px;
+    margin-bottom: 7px;
+}
+
+#freelancerInfoPage .freelancerBackground .right .employmentHistory .expriences .experience {
+    border-bottom: 1px solid #d5e0d5;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+#freelancerInfoPage .freelancerBackground .right .employmentHistory .expriences .experience .experienceTitle {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    color: rgb(44, 44, 44);
+}
+
+#freelancerInfoPage .freelancerBackground .right .employmentHistory .expriences .experience .experienceTime {
+    color: gray;
+    font-size: 0.9em;
+}
+
+#freelancerInfoPage .freelancerBackground .right .employmentHistory .expriences .experience .experienceDes {
+    font-size: 0.9em;
+}
+
+#freelancerInfoPage .icon {
+    border: 0.5px #14A800 solid;
+    border-radius: 50%;
+    display: inline-block;
+    height: 27px;
+    width: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#freelancerInfoPage .iconSvg {
+    font-size: 1em;
+}

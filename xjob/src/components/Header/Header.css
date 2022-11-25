@@ -72,6 +72,25 @@
     width: 220px;
 }
 
+#header .headerRight .dropdown .dropdown-menu.notification {
+    width: 355px;
+    padding: 0px;
+}
+
+#header .headerRight .dropdown .dropdown-menu.notification .seeAllNotification {
+    font-family: sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    font-weight: bold;
+    font-size: 1em;
+    color: rgb(44, 44, 44);
+}
+
+#header .headerRight .dropdown .dropdown-menu.notification .seeAllNotification:hover {
+    background-color: #F2F7F2;
+}
+
 #header .headerRight .dropdown .dropdown-menu .avatar {
     margin: auto;
     height: 70px;

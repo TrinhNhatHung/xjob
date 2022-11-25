@@ -46,6 +46,15 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "main_skill")
+	private String mainSkill;
+	
+	@Column(name = "introduction")
+	private String introduction;
+	
+	@Column(name = "hourly_rate")
+	private Integer hourlyRate;
+	
 	@Column(name = "status")
 	private Boolean status;
 	
@@ -72,4 +81,7 @@ public class User {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<UserSkill> userSkills;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<Experience> experiences;
 }

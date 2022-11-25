@@ -41,4 +41,11 @@ public class JobDao extends EntityDao<Job>{
 							.setParameter("uid", uid);
 		return query.uniqueResult();
 	}
+	
+	public String getAuthorById(Integer jobId) {
+		final String SQL = "SELECT author_id FROM job WHERE job_id = :jobId";
+		NativeQuery<String> query = openSession().createNativeQuery(SQL, String.class)
+				.setParameter("jobId", jobId);
+		return query.uniqueResult();
+	}
 }

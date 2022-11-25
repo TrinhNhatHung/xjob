@@ -85,4 +85,8 @@ public class JobService {
 		
 		return jobId;
 	}
+	
+	public Job getById(Integer jobId) {
+		return jobDao.getById(Job.class,jobId);
+	}
 }

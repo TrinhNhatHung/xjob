@@ -24,6 +24,14 @@
     color: #61dafb;
 }
 
+.mg-l-5 {
+    margin-left: 5px !important;
+}
+
+.mg-r-5 {
+    margin-right: 5px !important;
+}
+
 @font-face {
     font-family: 'XjobFonts';
     src: url('fonts/61388ce731b6f8e9486d7d78_rza-regular.woff2') format('woff2'), url('fonts/61388ce753bec1a84ad0500b_neue-montreal-medium.woff2') format('woff2'), url('fonts/TK3iWkUHHAIjg752GT8G.woff2') format('woff2')

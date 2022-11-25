@@ -31,4 +31,56 @@ public class UserDao extends EntityDao<User>{
 		int result = query.executeUpdate();
 		return result > 0;
 	}
+	
+	public void updateFreelancerInfo(User user) {
+		String SQL = "UPDATE user SET ";
+		if (user.getFirstName() != null) {
+			SQL += "first_name = :firstName,";
+		}
+		
+		if (user.getLastName() != null) {
+			SQL += "last_name = :lastName,";
+		}
+		
+		if (user.getMainSkill() != null) {
+			SQL += "main_skill = :mainSkill,";
+		}
+		
+		if (user.getIntroduction() != null) {
+			SQL += "introduction = :introduction,";
+		}
+		
+		if (user.getHourlyRate() != null) {
+			SQL += "hourly_rate = :hourlyRate,";
+		}
+		
+		SQL = SQL.substring(0, SQL.length() - 1);
+		
+		SQL += " WHERE uid = :uid";
+		
+		NativeQuery<User> query = getCurrentSession().createNativeQuery(SQL, User.class);
+		
+		if (user.getFirstName() != null) {
+			query.setParameter("firstName", user.getFirstName());
+		}
+		
+		if (user.getLastName() != null) {
+			query.setParameter("lastName", user.getLastName());
+		}
+		
+		if (user.getMainSkill() != null) {
+			query.setParameter("mainSkill", user.getMainSkill());
+		}
+		
+		if (user.getIntroduction() != null) {
+			query.setParameter("introduction", user.getIntroduction());
+		}
+		
+		if (user.getHourlyRate() != null) {
+			query.setParameter("hourlyRate", user.getHourlyRate());
+		}
+		
+		query.setParameter("uid", user.getUid());
+		query.executeUpdate();
+	}
 }

@@ -1,0 +1,21 @@
+#noAuthenPage {
+    margin-top: 5%;
+}
+
+#noAuthenPage .noAuthenIcon {
+    height: 125px;
+    width: 145px;
+}
+
+#noAuthenPage .text1 {
+    color: #14A800;
+    font-size: 2em;
+    margin-top: 30px;
+}
+
+#noAuthenPage .text2 {
+    font-family: sans-serif;
+    color: grey;
+    font-size: 0.95em;
+    margin-top: 10px;
+}

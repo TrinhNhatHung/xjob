@@ -65,10 +65,13 @@ function ProposalDialog() {
           ...input,
           letter: null
         });
-        alert(1);
+        dispatch(closeDialog());
       })
       .catch(()=> {
-        alert(2);
+        setError({
+          ...error,
+          letter: "Submit proposal failed"
+        })
       })
     }
   }

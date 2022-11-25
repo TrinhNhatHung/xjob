@@ -22,4 +22,5 @@ public class SkillDao extends EntityDao<Skill>{
 						.setParameter("skillName", skillName);
 		return query.uniqueResult();
 	}
+	
 }

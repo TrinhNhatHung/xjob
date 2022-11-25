@@ -11,15 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Table(name = "user_skill")
 @Entity(name = "user_skill")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class UserSkill {
@@ -27,12 +23,12 @@ public class UserSkill {
 	@EmbeddedId
 	private Id userSkillId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("skillId")
 	@JoinColumn(name = "skill_id", referencedColumnName = "skill_id")
 	private Skill skill;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("uid")
 	@JoinColumn(name = "uid", referencedColumnName = "uid")
 	private User user;

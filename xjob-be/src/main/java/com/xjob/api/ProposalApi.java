@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xjob.constant.BusinessConst;
 import com.xjob.persistence.Job;
+import com.xjob.persistence.Notification;
 import com.xjob.persistence.Proposal;
 import com.xjob.persistence.Proposal.Id;
 import com.xjob.persistence.User;
 import com.xjob.response.ProposalResponse;
+import com.xjob.service.JobService;
+import com.xjob.service.NotificationService;
 import com.xjob.service.ProposalService;
+import com.xjob.service.UserService;
+import com.xjob.util.NotificationUtil;
 
 @RestController
 @CrossOrigin
@@ -33,6 +39,21 @@ public class ProposalApi {
 	
 	@Autowired
 	private ProposalResponse proposalResponse;
+	
+	@Autowired
+	private NotificationService notificationService;
+	
+	@Autowired
+	private JobService jobService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private NotificationUtil notificationUtil;
+	
+	@Autowired
+    private SimpMessagingTemplate messagingTemplate;
 	
 	@GetMapping("/applicants")
 	public ResponseEntity<?> getProposalListByJob(@RequestParam(name = "jobId") Integer jobId){
@@ -69,6 +90,17 @@ public class ProposalApi {
 			proposal.setUser(user);
 			
 			proposalService.insert(proposal);
+			
+			Notification notification = new Notification();
+			notification.setUidFrom(uid);
+			job = jobService.getById(jobId);
+			notification.setUidTo(job.getAuthorId().getUid());
+			user = userService.getById(uid);
+			String content = notificationUtil.createProposalNotification(user.getLastName(), job.getTitle());
+			notification.setContent(content);
+			notificationService.insert(notification);
+			
+			messagingTemplate.convertAndSend("/topic/notifications/" + job.getAuthorId().getUid(), content);
 			return new ResponseEntity<Object>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

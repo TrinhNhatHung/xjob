@@ -18,6 +18,13 @@ import Applicants from "./pages/Applicants/Applicants";
 import JobDetail from "./pages/JobDetail/JobDetail";
 import JobPost from "./pages/JobPost/JobPost";
 import ProposalDialog from "./components/ProposalDialog/ProposalDialog";
+import NoAuthen from "./pages/NoAuthen/NoAuthen";
+import ClientInfo from "./pages/ClientInfo/ClientInfo";
+import FreelancerInfo from "./pages/FreelancerInfo/FreelancerInfo";
+import EditSkillDialog from "./components/EditSkillDialog/EditSkillDialog";
+import ExperienceDialog from "./components/ExperienceDialog/ExperienceDialog";
+import EditMainSkillDialog from "./components/EditProfileDialog/EditMainSkillDialog";
+import EditNameDialog from "./components/EditProfileDialog/EditNameDialog";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,9 +63,16 @@ function App() {
             <Route path={`/applicants/:jobId/applicants`} element={<Applicants />} />
             <Route path={`/applicants/:jobId/job-detail`} element={<JobDetail />} />
             <Route path={`/job-post`} element={<JobPost />} />
+            <Route path={`/client-info`} element={<ClientInfo />} />
+            <Route path={`/freelancer-info`} element={<FreelancerInfo />} />
+            <Route path={`/no-authen`} element={<NoAuthen />} />
           </Routes>
         </div>
       </BrowserRouter>
+      <EditSkillDialog/>
+      <ExperienceDialog/>
+      <EditMainSkillDialog/>
+      <EditNameDialog/>
       <ProposalDialog/>
     </div>
   );

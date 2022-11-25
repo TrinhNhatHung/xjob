@@ -27,4 +27,5 @@ public class Skill {
 	
 	@Column(name = "skill_name")
 	private String skillName;
+	
 }

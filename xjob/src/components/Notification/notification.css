@@ -1,0 +1,20 @@
+#notification {
+    height: 93px;
+    width: 100%;
+    border-bottom: 1px solid #d5e0d5;
+    padding: 15px 0px;
+}
+
+#notification:hover {
+    background-color: #F2F7F2;
+}
+
+#notification .avatarImg {
+    width: 30px;
+    height: 30px;
+    margin: 0px 15px;
+}
+
+#notification .content {
+    margin-right: 15px;
+}
