@@ -25,7 +25,7 @@ function VerifySuccess() {
                 setNotify({
                     display:true,
                     kind: "success",
-                    message: "Verify email successfully"
+                    message: "Xác nhận email thành công"
                 })
                 
             }

@@ -120,7 +120,7 @@ function Header() {
                   return <Notification key={index} notification={item}/>
                 })
               }
-              <div className="seeAllNotification">See All Notifications</div>
+              <div className="seeAllNotification">Xem tất cả thông báo</div>
             </ul>
           </div>
           <div className="dropdown">
@@ -142,12 +142,12 @@ function Header() {
                   href="/info"
                   onClick={redirectToSettings}
                 >
-                  Settings
+                  Cài đặt
                 </a>
               </li>
               <li className="dropdown-item-li">
                 <a className="dropdown-item" href="/" onClick={logOut}>
-                  Log out
+                  Đăng xuất
                 </a>
               </li>
             </ul>
@@ -163,11 +163,11 @@ function Header() {
               className="loginBtn nav-link"
               href="/login"
             >
-              Login
+              Đăng nhập
             </a>
           </li>
           <button className="btn signUpBtn" onClick={redirectToSignupPage}>
-            Sign Up
+            Đăng kí
           </button>
         </ul>
       );
@@ -190,12 +190,12 @@ function Header() {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/find-talent">
-                Find Talent
+                Tìm ứng viên
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/find-work">
-                Find work
+                Tìm việc
               </a>
             </li>
           </ul>

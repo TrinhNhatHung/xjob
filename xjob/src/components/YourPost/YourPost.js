@@ -18,17 +18,17 @@ function YourPost(props) {
       <div className="d-flex flec-row justify-content-between">
         <div className="info">
           {props.post.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY
-            ? "Hourly"
-            : "Fixed-price"}
+            ? "Giá theo giờ"
+            : "Giá cố định"}
         </div>
         <div className="proposals d-flex flex-row">
           <div className="proposalInfo d-flex flex-column">
             <span className="value">{props.post.proposals}</span>
-            <span className="label">Proposals</span>
+            <span className="label">Ứng tuyển</span>
           </div>
           <div className="proposalInfo d-flex flex-column">
             <span className="value">{props.post.hired}</span>
-            <span className="label">Hired</span>
+            <span className="label">Đã thuê</span>
           </div>
         </div>
       </div>

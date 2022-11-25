@@ -22,7 +22,7 @@ function VerifyEmail() {
         ...notify,
         display: true,
         kind: "success",
-        message: "New verification email is successfully sent. Please, check your email..."
+        message: "Một email xác nhận mới đã được gửi. Vui lòng kiểm tra email của bạn..."
       })
     }).catch(()=>{
     });  
@@ -49,16 +49,15 @@ function VerifyEmail() {
       }
       <div id="controlVerify">
         <img className="verifyIcon" src={VerifyIcon} alt="" />
-        <div className="title">Verify your email to proceed</div>
+        <div className="title">Xác nhận email của bạn để tiếp tục</div>
         <div className="message">
-          We just sent an email to the address: <span className="emailAddress">{user.email}</span> <br />
-          Please check your email and click on the link provided to verify your
-          address.
+          Chúng tôi vừa gửi email tới địa chỉ: <span className="emailAddress">{user.email}</span> <br />
+          Vui lòng kiểm tra email và  click vào link được cung cấp để xác nhận địa chỉ email của bạn.
         </div>
         <div className="btnGroup d-flex justify-content-center">
-            <button className="btn resendBtn" onClick={handleResendVerificationEmail}>Resend Verification Email</button>
+            <button className="btn resendBtn" onClick={handleResendVerificationEmail}>Gửi lại Email xác nhận</button>
             <button className="btn redirectGmailInboxBtn">
-                <a href="https://gmail.com" target="_blank" rel="noreferrer">Go to Gmail Inbox</a>
+                <a href="https://gmail.com" target="_blank" rel="noreferrer">Chuyển tới hộp thoại Gmail</a>
             </button>
         </div>
       </div>

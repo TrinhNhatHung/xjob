@@ -47,39 +47,39 @@ function DrawerDetailJob(props) {
             <SellIcon className="icon"/>
             <div>
                 <div className="detailJobDrawerInfoText">${price}</div>
-                <div className="detailJobDrawerInfoLabel">Fixed-price</div>
+                <div className="detailJobDrawerInfoLabel">Giá cố định</div>
             </div>
         </div>
       </div>;
     } else {
-      let duration = "days";
+      let duration = "ngày";
       if (termClass === BusinessConst.TERM_CLASS_YEAR){
-        duration = "years";
+        duration = "năm";
       } else if (termClass === BusinessConst.TERM_CLASS_MONTH){
-        duration = "months";
+        duration = "tháng";
       } else if (termClass === BusinessConst.TERM_CLASS_WEEK){
-        duration = "weeks";
+        duration = "tuần";
       }
       return <div className="detailJobDrawerInfo row">
         <div className="col-4 d-flex flex-row">
             <AccessTimeIcon className="icon"/>
             <div>
-                <div className="detailJobDrawerInfoText">${price}</div>
-                <div className="detailJobDrawerInfoLabel">Hourly</div>
+                <div className="detailJobDrawerInfoText">{price} VND</div>
+                <div className="detailJobDrawerInfoLabel">Giá theo giờ</div>
             </div>
         </div>
         <div className="col-4 d-flex flex-row">
             <CalendarMonthIcon className="icon"/>
             <div>
-                <div className="detailJobDrawerInfoText">{`${termFrom} to ${termTo} ${duration}`}</div>
-                <div className="detailJobDrawerInfoLabel">Project Length</div>
+                <div className="detailJobDrawerInfoText">{`${termFrom} tới ${termTo} ${duration}`}</div>
+                <div className="detailJobDrawerInfoLabel">Thời gian dự án</div>
             </div>
         </div>
         <div className="col-4 d-flex flex-row">
             <AccessAlarmIcon className="icon"/>
             <div>
-                <div className="detailJobDrawerInfoText">{`Less than ${hourPerWeek} hrs/week`}</div>
-                <div className="detailJobDrawerInfoLabel">Hourly</div>
+                <div className="detailJobDrawerInfoText">{`Khoảng ${hourPerWeek} giờ/tuần`}</div>
+                <div className="detailJobDrawerInfoLabel">Số giờ trong tuần</div>
             </div>
         </div>
       </div>;
@@ -99,7 +99,7 @@ function DrawerDetailJob(props) {
         <div className="content">
           <div className="detailJobDrawerTitle d-flex justify-content-between">
             <span>{detailJobDrawer.post.title}</span>
-            <button className="btn btnSubmitProposal" onClick={submitProposal}>Submit a Proposal</button>
+            <button className="btn btnSubmitProposal" onClick={submitProposal}>Gửi ứng tuyển</button>
           </div>
           <div className="detailJobDrawerDetail" dangerouslySetInnerHTML={{__html: detailJobDrawer.post.detail}}>
           </div>
@@ -107,7 +107,7 @@ function DrawerDetailJob(props) {
             renderPostInfo()
           }
           <div className="skills d-flex flex-column">
-            <span className="skillsTitle">Skills</span>
+            <span className="skillsTitle">Kĩ năng</span>
             <div>
               {detailJobDrawer.post.skills.map((skill, index) => {
                 return (

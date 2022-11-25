@@ -86,7 +86,7 @@ function ProposalDialog() {
       aria-describedby="alert-dialog-description"
     >
       <div className="form-item d-flex flex-column">
-        <label className="form-item-label" htmlFor="letter">Cover Letter</label>
+        <label className="form-item-label" htmlFor="letter">Giới thiệu</label>
         <textarea
             ref={letterRef}
             className="form-item-input" 
@@ -99,8 +99,8 @@ function ProposalDialog() {
           <span className="error">{error.letter}</span>
       </div>
       <div className="btnGroup d-flex mt-4">
-        <button className="btn btnSubmit" onClick={submitProposal}>Submit a Proposal</button>
-        <button className="btn btnCancel" onClick={handleClose}>Cancel</button>
+        <button className="btn btnSubmit" onClick={submitProposal}>Gửi ứng tuyển</button>
+        <button className="btn btnCancel" onClick={handleClose}>Huỷ</button>
       </div>
     </Dialog>
   );

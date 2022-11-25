@@ -109,8 +109,8 @@ function EditMainSkillDialog() {
         <span className="error">{error.introduction}</span>
       </div>
       <div className="btnGroup d-flex justify-content-end">
-        <button className="btn btnSubmit" onClick={saveInfo}>Save</button>
-        <button className="btn btnCancel" onClick={handleClose}>Cancel</button>
+        <button className="btn btnSubmit" onClick={saveInfo}>Lưu</button>
+        <button className="btn btnCancel" onClick={handleClose}>Huỷ</button>
       </div>
     </Dialog>
     );

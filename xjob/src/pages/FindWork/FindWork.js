@@ -39,19 +39,19 @@ function FindWork() {
     let termTo = post.termTo;
     let price = post.price;
     if (paymentKind === BusinessConst.PAYMENT_KIND_FIXED_PRICE){
-      result += "Fixed-price";
-      result += ` - Est. Budget:$${price}`;
+      result += "Giá cố định";
+      result += ` - Est. Ngân sách:${price} VND`;
     } else {
-      result += `Hourly:${price}`;
-      let duration = "days";
+      result += `Giá theo giờ:${price} VND`;
+      let duration = "ngày";
       if (termClass === BusinessConst.TERM_CLASS_YEAR){
-        duration = "years";
+        duration = "năm";
       } else if (termClass === BusinessConst.TERM_CLASS_MONTH){
-        duration = "months";
+        duration = "tháng";
       } else if (termClass === BusinessConst.TERM_CLASS_WEEK){
-        duration = "weeks";
+        duration = "tuần";
       }
-      result += ` - Est. Time:${termFrom} to ${termTo} ${duration}, Less than ${hourPerWeek} hrs/week`;
+      result += ` - Est. Thời gian:${termFrom} tới ${termTo} ${duration}, Khoảng ${hourPerWeek} giờ/tuần`;
     }
     return result;
   }
@@ -60,7 +60,7 @@ function FindWork() {
     if (posts.length > 0) {
       return (
         <div className="jobs">
-          <div className="jobsTitle">Jobs you might like</div>
+          <div className="jobsTitle">Công việc phù hợp với bạn</div>
           {posts.map((post,index) => {
             return (
               <Post key={index}
@@ -75,16 +75,16 @@ function FindWork() {
             );
           })}
           <button onClick={handleLoadMore} className="loadMoreBtn">
-            Load More Jobs
+            Xem thêm
           </button>
         </div>
       );
     } else {
       return (
         <div className="jobs d-flex flex-column">
-          <div className="jobsTitle noPost">Jobs you might like</div>
+          <div className="jobsTitle noPost">Công việc phù hợp với bạn</div>
           <img className="emptyFileIcon" src={FileIcon} alt="" />
-          <span className="text1">No active job posts</span>
+          <span className="text1">Không có công việc nào</span>
         </div>
       );
     }

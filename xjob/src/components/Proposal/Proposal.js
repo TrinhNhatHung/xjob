@@ -18,12 +18,12 @@ function Proposal(props) {
                 <div className="d-flex flex-row justify-content-between">
                     <span className="proposalName">{props.proposal.firstName + " " + props.proposal.lastName}</span>
                     <div className="btnGroup">
-                        <button className="button btnMessage">Messages</button>
-                        <button className="button btnHire">Hire</button>
+                        <button className="button btnMessage">Nhắn tin</button>
+                        <button className="button btnHire">Thuê</button>
                     </div>
                 </div>
                 <div className="letter">
-                    <b>Cover letter</b> - {letter}
+                    <b>Thư giới thiệu</b> - {letter}
                 </div>
                 <div className="skills">
                     {

@@ -6,9 +6,9 @@ function NoAuthen() {
     return (
         <div id="noAuthenPage">
             <img className="noAuthenIcon" src={NoAuthenIcon} alt="" />
-            <div className="text1">You don't currently have access to this page</div>
-            <div className="text2">If you have another account, switch to it and try again.<br/>
-                Or you can visit our home page.</div>
+            <div className="text1">Hiện tại bạn không có quyền truy cập vào trang này</div>
+            <div className="text2">Nếu có một tài khoản khác, hãy đổi tài khoản để tiếp tục.<br/>
+                Hoặc bạn có thể trở về trang chủ của chúng tôi.</div>
         </div>
     );
 }

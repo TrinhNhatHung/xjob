@@ -225,7 +225,7 @@ function Signup() {
           </a>
           <div id="selectRole">
             <span className="selectRoleTitle">
-              Join as a client or freelancer
+              Tham gia để trở thành khách hàng hay freelancer
             </span>
             <div className="roles d-flex justify-content-center">
               <div
@@ -234,7 +234,7 @@ function Signup() {
                 onClick={togglClientRole}
               >
                 <img className="roleIcon" src={clientIcon} alt="" />
-                <span>I’m a client, hiring for a project</span>
+                <span>Tôi là khách hàng, tìm kiếm ứng viên cho dự án</span>
               </div>
               <div
                 ref={freelancerDiv}
@@ -242,7 +242,7 @@ function Signup() {
                 onClick={toggleFreelancerRole}
               >
                 <img className="roleIcon" src={freelancerIcon} alt="" />
-                <span>I’m a freelancer, looking for work</span>
+                <span>Tôi là freelancer, tìm kiếm công việc</span>
               </div>
             </div>
             <button
@@ -250,12 +250,12 @@ function Signup() {
               className="btn creAccBtn"
               onClick={handleCreateAcc}
             >
-              Create Account
+              Tạo tài khoản
             </button>
-            <div className="login">
-              <span>Already have an account?</span>
+            <div className="login mt-4">
+              <span>Đã có tài khoản?</span>
               <a onClick={navigateToLoginPage} href="/login">
-                Login
+                Đăng nhập
               </a>
             </div>
           </div>
@@ -264,9 +264,9 @@ function Signup() {
     } else {
       let title = "";
       if (selectedRole === BusinessConst.ROLE_CLIENT) {
-        title = "Sign up to hire talent";
+        title = "Đăng kí để tìm kiếm ứng viên";
       } else {
-        title = "Sign up to find work";
+        title = "Đăng kí để tìm kiếm công việc";
       }
       return (
         <div id="signUpPage">
@@ -276,13 +276,13 @@ function Signup() {
           <div className="switchRole">
             <span className={"text"}>
               {selectedRole === BusinessConst.ROLE_CLIENT
-                ? "Looking for work? "
-                : "Here to hire talent?"}
+                ? "Để tìm kiếm công việc? "
+                : "Để tìm kiếm ứng viên?"}
             </span>
             <span onClick={switchRole} className={"switchText"}>
               {selectedRole === BusinessConst.ROLE_CLIENT
-                ? "Apply as talent "
-                : "Join as a client"}
+                ? "Đăng kí trở thành freelancer "
+                : "Đăng kí trở thành khách hàng"}
             </span>
           </div>
           <div id="signUpPageForm">
@@ -293,7 +293,7 @@ function Signup() {
                   type="text"
                   className="form-control"
                   id="firstName"
-                  placeholder="First name"
+                  placeholder="Tên"
                   name="firstName"
                   onChange={handleChangeInput}
                   ref={firstNameInput}
@@ -313,7 +313,7 @@ function Signup() {
                   className="form-control"
                   id="lastName"
                   name="lastName"
-                  placeholder="Last name"
+                  placeholder="Họ"
                   onChange={handleChangeInput}
                   ref={lastNameInput}
                 />
@@ -352,7 +352,7 @@ function Signup() {
                 className="form-control"
                 id="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Mật khẩu"
                 onChange={handleChangeInput}
                 ref={passwordInput}
               />
@@ -366,12 +366,12 @@ function Signup() {
               )}
             </div>
             <button className="btn creAccBtn" onClick={signUpNewAccount}>
-              Create my account
+              Tạo tài khoản
             </button>
             <div className="login">
-              <span>Already have an account?</span>
+              <span>Đã có tài khoản ?</span>
               <a onClick={navigateToLoginPage} href="/login">
-                Login
+                Đăng nhập
               </a>
             </div>
           </div>

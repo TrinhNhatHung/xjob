@@ -52,7 +52,7 @@ function Login() {
         setError({
           ...error,
           email: null,
-          password: "Incorrect email or password",
+          password: "Email hoặc mật khẩu không đúng",
         });
       });
   };
@@ -60,7 +60,7 @@ function Login() {
     let emailCheck = null;
     inputEmailDiv.current.classList.remove("borderError");
     if (user.email === null || user.email === "" || user.email === undefined) {
-      emailCheck = "A valid email is required";
+      emailCheck = "Email hợp lệ là bắt buộc";
       inputEmailDiv.current.classList.add("borderError");
     }
 
@@ -71,7 +71,7 @@ function Login() {
       user.password === "" ||
       user.password === undefined
     ) {
-      passwordCheck = "Password is required";
+      passwordCheck = "Mật khẩu là bắt buộc";
       inputPasswordDiv.current.classList.add("borderError");
     }
 
@@ -132,7 +132,7 @@ function Login() {
         XJob
       </a>
       <div id="selectAccount" className="d-flex flex-column align-items-center">
-        <span className="loginFormTitle">Log in to XJob</span>
+        <span className="loginFormTitle">Đăng nhập vào XJob</span>
         <div ref={inputEmailDiv} className="email input-group mb-3">
           <span className="icon input-group-text">
             <PersonIcon />
@@ -167,7 +167,7 @@ function Login() {
               className="form-control"
               id="floatingInputGroup1"
               name="password"
-              placeholder="Password"
+              placeholder="Mật khẩu"
               value={user.password}
               onChange={handleInput}
             />
@@ -182,11 +182,11 @@ function Login() {
           <React.Fragment />
         )}
         <button className="btn loginBtn" onClick={handleSignIn}>
-          <span>Continue with Email</span>
+          <span>Tiếp tục với email</span>
         </button>
-        <div className="seperate">Don't have a XJob account ?</div>
+        <div className="seperate">Bạn có tài khoản XJob chưa ?</div>
         <button onClick={navigateToSignUpPage} className="btn signUpBtn">
-          Sign Up
+          Đăng ký
         </button>
       </div>
     </div>

@@ -67,7 +67,6 @@
 #clientDashboardPage .yourPosts .postJobBtn {
     background-color: #14a800;
     color: #fff;
-    width: 130px;
     border-radius: 50px;
     margin: auto;
     margin-top: 50px;
@@ -81,7 +80,6 @@
 #clientDashboardPage .title .postJobBtn {
     background-color: #14a800;
     color: #fff;
-    width: 130px;
     border-radius: 50px;
 }
 

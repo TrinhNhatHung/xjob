@@ -8,9 +8,9 @@ function ApplicantHeader(props) {
     return (
         <div id="applicantHeader">
             <ul className="tabs d-flex flex-row justify-content-around">
-                <li className="tab"><a className={location.pathname === `/applicants/${props.jobId}/job-detail` ? "active" : ""} href={`/applicants/${props.jobId}/job-detail`}>VIEW JOB POST</a></li>
-                <li className="tab"><a className={location.pathname === `/applicants/${props.jobId}/applicants` ? "active" : ""} href={`/applicants/${props.jobId}/applicants`}>REVIEW PROPOSAL</a></li>
-                <li className="tab"><a className={location.pathname === `/applicants/${props.jobId}/hired` ? "active" : ""} href={`/applicants/${props.jobId}/hired`}>HIRE</a></li>
+                <li className="tab"><a className={location.pathname === `/applicants/${props.jobId}/job-detail` ? "active" : ""} href={`/applicants/${props.jobId}/job-detail`}>Xem bài đăng công việc</a></li>
+                <li className="tab"><a className={location.pathname === `/applicants/${props.jobId}/applicants` ? "active" : ""} href={`/applicants/${props.jobId}/applicants`}>Xem yêu cầu ứng tuyển</a></li>
+                <li className="tab"><a className={location.pathname === `/applicants/${props.jobId}/hired` ? "active" : ""} href={`/applicants/${props.jobId}/hired`}>Thuê</a></li>
             </ul>
         </div>
     );

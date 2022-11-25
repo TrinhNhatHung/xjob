@@ -129,10 +129,10 @@ function EditNameDialog(props) {
       </div>
       <div className="btnGroup d-flex">
         <button className="btn btnSubmit" onClick={saveInput}>
-          Save
+          Lưu
         </button>
         <button className="btn btnCancel" onClick={handleClose}>
-          Cancel
+          Huỷ
         </button>
       </div>
     </Dialog>

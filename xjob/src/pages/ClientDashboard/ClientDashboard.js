@@ -37,7 +37,7 @@ function ClientDashboard() {
     if (posts.length > 0) {
       return (
         <div className="yourPosts">
-          <div className="yourPostsTitle">Your Postings</div>
+          <div className="yourPostsTitle">Bài đăng của bạn</div>
           {posts.map((post,index) => {
             return (
               <YourPost key={index}
@@ -46,18 +46,18 @@ function ClientDashboard() {
             );
           })}
           <button onClick={handleLoadMore} className="loadMoreBtn">
-            Load More Jobs
+            Xem thêm
           </button>
         </div>
       );
     } else {
       return (
         <div className="yourPosts d-flex flex-column">
-          <div className="yourPostsTitle noPost">Your Postings</div>
+          <div className="yourPostsTitle noPost">Bài đăng của bạn</div>
           <img className="emptyFileIcon" src={FileIcon} alt="" />
-          <span className="text1">No active job posts</span>
-          <span className="text2">Post a job to the marketplace and let talent come to you.</span>
-          <button className="btn postJobBtn" onClick={postJob}>Post a Job</button>
+          <span className="text1">Không có công việc nào</span>
+          <span className="text2">Hãy đăng một công việc và tìm kiếm một ứng viên cho bạn.</span>
+          <button className="btn postJobBtn" onClick={postJob}>Đăng công việc</button>
         </div>
       );
     }
@@ -65,8 +65,8 @@ function ClientDashboard() {
   return (
     <div id="clientDashboardPage">
       <div className="title d-flex flex-row justify-content-between">
-        <span>Your Dashboard</span>
-        <button className="btn postJobBtn" onClick={postJob}>Post a Job</button>
+        <span>Dashboard của bạn</span>
+        <button className="btn postJobBtn" onClick={postJob}>Đăng công việc</button>
       </div>
       {renderYourPosts()}
     </div>

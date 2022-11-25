@@ -272,7 +272,7 @@ function JobPost() {
       }
       <div className="formItem mt-3">
         <label className="formItemLabel" htmlFor="title">
-          Add a title
+          Tiêu đề
         </label>
         <input
           id="title"
@@ -286,7 +286,7 @@ function JobPost() {
       </div>
       <div className="formItem">
         <label className="formItemLabel" htmlFor="detail">
-          Describe your job
+          Mô tả về công việc
         </label>
         <textarea
           id="detail"
@@ -301,13 +301,13 @@ function JobPost() {
       <br />
       <div className="formItem">
         <label className="formItemLabel" htmlFor="skills">
-          Search skills or add your own
+          Thêm kĩ năng
         </label>
         <input id="skills" ref={skillsRef} className="formItemInput" type="text" />
         <span className="errorInput">{error.skills}</span>
         {selectedSkills.length > 0 ? (
           <div>
-            <div className="formItemLabel subLabel mt-2">Selected skills</div>
+            <div className="formItemLabel subLabel mt-2">Kĩ năng đã chọn</div>
             <div className="skills selectedSkills">
               {selectedSkills.map((skill, index) => {
                 return (
@@ -327,7 +327,7 @@ function JobPost() {
         ) : (
           <React.Fragment />
         )}
-        <span className="formItemLabel subLabel mt-2">Popular skills</span>
+        <span className="formItemLabel subLabel mt-2">Kĩ năng phổ biến</span>
         <div className="skills suggestSkills">
           {skills.map((skill, index) => {
             return (
@@ -346,7 +346,7 @@ function JobPost() {
       </div>
       <div className="formItem">
         <label className="formItemLabel" htmlFor="">
-          About your budget
+          Ngân sách
         </label>
         <div className="d-flex">
           <div
@@ -361,7 +361,7 @@ function JobPost() {
             <div className="d-flex flex-column">
               <SellIcon className="icon" />
               <label className="label" htmlFor="paymentKind_fixedPrice">
-                Project budget
+                Cố định
               </label>
             </div>
             <input
@@ -388,7 +388,7 @@ function JobPost() {
             <div className="d-flex flex-column">
               <AccessTimeIcon className="icon" />
               <label className="label" htmlFor="paymentKind_hourly">
-                Hourly rate
+                Theo giờ
               </label>
             </div>
             <input
@@ -405,8 +405,8 @@ function JobPost() {
         <div className="price mt-3">
           <label htmlFor="price">
             {input.paymentKind === BusinessConst.PAYMENT_KIND_FIXED_PRICE
-              ? "Fixed-price"
-              : "Hourly Rate"}
+              ? "Giá cố định"
+              : "Giá theo giờ"}
           </label>
           <input
             ref={priceRef}
@@ -424,12 +424,12 @@ function JobPost() {
       {input.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY ? (
         <div className="formItem">
           <label className="formItemLabel mb-3" htmlFor="">
-            How long will your work take?
+            Thời gian có thể kéo dài trong khoảng ?
           </label>
           <div className="row">
             <div className="col d-flex flex-column">
               <label id="termLabel" htmlFor="termClass">
-                Term
+                Khoảng thời gian
               </label>
               <select
                 id="termClass"
@@ -445,7 +445,7 @@ function JobPost() {
             </div>
             <div className="col d-flex flex-column">
               <label id="termLabel" htmlFor="termFrom">
-                From
+                Từ
               </label>
               <input
                 ref={termFromRef}
@@ -460,7 +460,7 @@ function JobPost() {
             </div>
             <div className="col d-flex flex-column">
               <label id="termLabel" htmlFor="termTo">
-                To
+                Tới
               </label>
               <input
                 ref={termToRef}
@@ -475,7 +475,7 @@ function JobPost() {
             </div>
             <div className="col d-flex flex-column">
               <label id="termLabel" htmlFor="hourPerWeek">
-                Hour/Week
+                Giờ/Tuần
               </label>
               <input
                 ref={hourPerWeekRef}
@@ -495,10 +495,10 @@ function JobPost() {
       )}
       <div>
         <button className="btn backBtn m-2" onClick={handleBack}>
-          Back
+          Quay về
         </button>
         <button className="btn postJob m-2" onClick={handlePostJob}>
-          Post The Job
+          Đăng công việc
         </button>
       </div>
     </div>

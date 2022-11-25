@@ -9,8 +9,8 @@ function Home() {
                     <span className="bannerSlogan">Hire freelance Dev and IT experts to help you scale</span>
                     <span className="bannerSloganDetail">Hire independent professionals to shorten development cycles, bury backlogs, and drive product growth.</span>
                     <div className="buttonGroup">
-                        <button className="findTalent btn">Find Talent</button>
-                        <button className="findWork btn">Find Work</button>
+                        <button className="findTalent btn">Tìm ứng viên</button>
+                        <button className="findWork btn">Tìm công việc</button>
                     </div>
                 </div>
                 <div className=" col bannerImage"/>

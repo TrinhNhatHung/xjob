@@ -41,42 +41,42 @@ function JobDetail() {
           <div className="col-4 d-flex flex-row">
             <SellIcon className="icon" />
             <div>
-              <div className="jobDetailInfoText">${price}</div>
-              <div className="jobDetailInfoLabel">Fixed-price</div>
+              <div className="jobDetailInfoText">${price} VND</div>
+              <div className="jobDetailInfoLabel">Giá cố định</div>
             </div>
           </div>
         </div>
       );
     } else {
-      let duration = "days";
+      let duration = "ngày";
       if (termClass === BusinessConst.TERM_CLASS_YEAR) {
-        duration = "years";
+        duration = "năm";
       } else if (termClass === BusinessConst.TERM_CLASS_MONTH) {
-        duration = "months";
+        duration = "tháng";
       } else if (termClass === BusinessConst.TERM_CLASS_WEEK) {
-        duration = "weeks";
+        duration = "tuần";
       }
       return (
         <div className="jobDetailInfo row">
           <div className="col-4 d-flex flex-row">
             <AccessTimeIcon className="icon" />
             <div>
-              <div className="jobDetailInfoText">${price}</div>
-              <div className="jobDetailInfoLabel">Hourly</div>
+              <div className="jobDetailInfoText">{price} VND</div>
+              <div className="jobDetailInfoLabel">Giá theo giờ</div>
             </div>
           </div>
           <div className="col-4 d-flex flex-row">
             <CalendarMonthIcon className="icon" />
             <div>
-              <div className="jobDetailInfoText">{`${termFrom} to ${termTo} ${duration}`}</div>
-              <div className="jobDetailInfoLabel">Project Length</div>
+              <div className="jobDetailInfoText">{`${termFrom} tới ${termTo} ${duration}`}</div>
+              <div className="jobDetailInfoLabel">Thời gian dự án</div>
             </div>
           </div>
           <div className="col-4 d-flex flex-row">
             <AccessAlarmIcon className="icon" />
             <div>
-              <div className="jobDetailInfoText">{`Less than ${hourPerWeek} hrs/week`}</div>
-              <div className="jobDetailInfoLabel">Hourly</div>
+              <div className="jobDetailInfoText">{`Khoảng ${hourPerWeek} giờ/tuần`}</div>
+              <div className="jobDetailInfoLabel">Số giờ trong tuần</div>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@ function JobDetail() {
           <div className="detailJobDetail" dangerouslySetInnerHTML={{__html: job.detail}}></div>
           {renderPostInfo()}
           <div className="skills d-flex flex-column">
-            <span className="skillsTitle">Skills</span>
+            <span className="skillsTitle">Kĩ năng</span>
             <div>
               {job.skills.map((skill, index) => {
                 return (
@@ -113,11 +113,11 @@ function JobDetail() {
         <div className="jobActions">
           <div className="jobAction">
             <EditIcon className="actionIcon" />
-            <a className="actionText" href="/applicants/1/job-detail/edit">Edit Posting</a>
+            <a className="actionText" href="/applicants/1/job-detail/edit">Cập nhật bài đăng</a>
           </div>
           <div className="jobAction">
             <CloseIcon className="actionIcon"/>
-            <a className="actionText" href="/applicants/1/job-detail/edit">Remove Posting</a>
+            <a className="actionText" href="/applicants/1/job-detail/edit">Xoá bài đăng</a>
           </div>
         </div>
       </div>
