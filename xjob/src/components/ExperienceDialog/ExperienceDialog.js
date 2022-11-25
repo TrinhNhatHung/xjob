@@ -4,6 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import { useDispatch, useSelector } from "react-redux";
 import {closeExperienceDialog, setExperience} from "../../reducer/experienceDialog";
 import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
+import {textToHtml} from "../../util/HtmlTagUtil";
 
 function ExperienceDialog() {
   const { isOpen, experienceId, experience} = useSelector((state) => state.experienceDialog);
@@ -86,7 +87,10 @@ function ExperienceDialog() {
 
     if (validate){
       axiosRequiredAuthor.post("/user/update-freelancer-experience", null, {
-        params : experience
+        params : {
+          ...experience,
+          detail: textToHtml(experience.detail)
+        }
       })
       .then(()=> {
         dispatch(closeExperienceDialog());

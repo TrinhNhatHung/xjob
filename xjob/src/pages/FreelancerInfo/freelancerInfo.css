@@ -72,10 +72,8 @@
     margin-top: 25px;
     display: flex;
     justify-content: space-between;
-}
-
-#freelancerInfoPage .freelancerBackground .right .intro .introduce .text {
-    width: calc(100% - 40px);
+    color: gray;
+    font-size: 0.95em;
 }
 
 #freelancerInfoPage .freelancerBackground .right .skills .skillChips {

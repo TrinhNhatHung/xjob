@@ -312,4 +312,19 @@ public class UserApi {
 			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/client-info")
+	public ResponseEntity<?> getClientInfo(){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			User user = userService.getById(uid);
+			Map<String, Object> data = userResponse.responseClientInfo(user);
+			Map<String, Object> result = new HashMap<>();
+			result.put("clientInfo", data);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

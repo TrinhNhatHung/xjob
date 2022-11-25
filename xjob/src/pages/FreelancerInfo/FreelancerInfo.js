@@ -10,6 +10,7 @@ import { openSkillDialog } from "../../reducer/editSkillDialog";
 import { openExperienceDialog } from "../../reducer/experienceDialog";
 import { openProfileDialog } from "../../reducer/editProfileDialog";
 import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
+import {htmlToText} from "../../util/HtmlTagUtil";
 
 function FreelancerInfo() {
   const [info, setInfo] = useState({
@@ -36,7 +37,10 @@ function FreelancerInfo() {
     dispatch(
       openExperienceDialog({
         experienceId: experience.experienceId,
-        experience,
+        experience: {
+          ...experience,
+          detail: htmlToText(experience.detail)
+        }
       })
     );
   };
@@ -94,8 +98,7 @@ function FreelancerInfo() {
         <div className="experienceTime">
           <span>{time}</span>
         </div>
-        <div className="experienceDes">
-          <span>{experience.detail}</span>
+        <div className="experienceDes" dangerouslySetInnerHTML={{__html: experience.detail }}>
         </div>
       </div>
     );
@@ -114,7 +117,7 @@ function FreelancerInfo() {
       openProfileDialog({
         kind: "MAIN_SKILL",
         mainSkill: info.mainSkill,
-        introduction: info.introduction,
+        introduction: htmlToText(info.introduction)
       })
     );
   };
@@ -193,8 +196,7 @@ function FreelancerInfo() {
                   <EditIcon className="iconSvg" />
                 </span>
               </div>
-              <div className="introduce d-flex">
-                <span className="text">{info.introduction}</span>
+              <div className="introduce d-flex" dangerouslySetInnerHTML={{__html: info.introduction}}>
               </div>
             </div>
             <div className="element skills">

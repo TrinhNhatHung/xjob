@@ -5,6 +5,7 @@ import {closeProfileDialog, setProfile} from "../../reducer/editProfileDialog";
 import "./editProfileDialog.css";
 import axiosRequiredAuthor from '../../api/axiosRequiredAuthor';
 import { useState } from 'react';
+import {textToHtml} from "../../util/HtmlTagUtil";
 
 function EditMainSkillDialog() {
     const profileDialog = useSelector(state => state.profileDialog);
@@ -64,7 +65,7 @@ function EditMainSkillDialog() {
             axiosRequiredAuthor.post("/user/update-freelancer-info", null, {
                 params: {
                     mainSkill: profileDialog.mainSkill,
-                    introduction: profileDialog.introduction
+                    introduction: textToHtml(profileDialog.introduction)
                 }
             })
             .then(()=> {

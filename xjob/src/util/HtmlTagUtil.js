@@ -3,11 +3,14 @@ const textToHtml = (text)=> {
         return text;
     }
 
-    return text.split('\n').join('\n<br/>\n');
+    return text.split('\n').join('<br/>');
 }
 
 const htmlToInlineText = (html)=> {
     return html.replaceAll("<br/>"," ");
 }
 
-export {textToHtml,htmlToInlineText}
+const htmlToText = (html)=> {
+    return html.replaceAll("<br/>","\n");
+}
+export {textToHtml,htmlToInlineText,htmlToText}

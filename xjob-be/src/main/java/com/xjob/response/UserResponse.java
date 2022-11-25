@@ -34,4 +34,13 @@ public class UserResponse {
 		
 		return map;
 	}
+	
+	public Map<String,Object> responseClientInfo(User user){
+		Map<String, Object> map = new HashMap<>();
+		map.put("email", user.getEmail());
+		map.put("firstName", user.getFirstName());
+		map.put("lastName", user.getLastName());
+		map.put("introduction", user.getIntroduction());
+		return map;
+	}
 }

@@ -1,0 +1,57 @@
+#clientInfoPage {
+    border: 1px solid #d5e0d5;
+    width: 45%;
+    border-radius: 10px;
+    margin: auto;
+    font-family: sans-serif;
+}
+
+#clientInfoPage .itemRow.not-last {
+    border-bottom: 1px solid #d5e0d5;
+}
+
+#clientInfoPage .itemRow {
+    padding: 30px 30px;
+}
+
+#clientInfoPage .itemRow .miniTitle {
+    font-size: 1em;
+    font-weight: bold;
+    color: rgb(65, 65, 65);
+}
+
+#clientInfoPage .itemRow .title {
+    font-size: 1.5em;
+}
+
+#clientInfoPage .itemRow .content {
+    font-size: 0.9em;
+    color: gray;
+    text-align: left;
+}
+
+#clientInfoPage .itemRow .avatar {
+    margin: auto;
+    margin-top: 30px;
+    display: inline-block;
+}
+
+#clientInfoPage .itemRow .img {
+    height: 85px;
+    width: 85px;
+}
+
+#clientInfoPage .icon {
+    border: 0.5px #14A800 solid;
+    border-radius: 50%;
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#clientInfoPage .iconSvg {
+    font-size: 1.2em;
+}
