@@ -20,6 +20,15 @@
     font-size: 0.95em;
 }
 
+#proposal .proposalInfo .proposalName a {
+    text-decoration: none;
+    color: #174296;
+}
+
+#proposal .proposalInfo .proposalName a:hover {
+    text-decoration: underline;
+}
+
 #proposal .proposalInfo .btnGroup .button {
     color: #3c8224;
     border: #3c8224 1px solid;

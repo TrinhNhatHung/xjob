@@ -38,13 +38,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.authorizeRequests().antMatchers("/job/post-job", "/user/client-info").hasRole("CLIENT")
-				.antMatchers("/proposal/post-proposal", "/user/freelancer-info", "/user/update-freelancer-info",
-						"/user/update-freelancer-skill", "/user//update-freelancer-experience",
-						"/user//delete-freelancer-experience")
-				.hasRole("FREELANCER").antMatchers("/user/verify-email", "/user/update-verify-code",
-						"/job/job-by-author", "/notification-list")
-				.authenticated().antMatchers("/**").permitAll();
+		http.authorizeRequests()
+				.antMatchers("/job/post-job").hasRole("CLIENT")
+				.antMatchers("/proposal/post-proposal", "/user/update-freelancer-info",
+						"/user/update-freelancer-skill", "/user/update-freelancer-experience",
+						"/user//delete-freelancer-experience").hasRole("FREELANCER")
+				.antMatchers("/user/verify-email", "/user/update-verify-code",
+						"/job/job-by-author", "/notification-list","/user/freelancer-info","/user/client-info").authenticated()
+				.antMatchers("/**").permitAll();
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 		http.cors();
 	}

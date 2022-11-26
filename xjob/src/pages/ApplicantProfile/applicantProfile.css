@@ -1,0 +1,124 @@
+#applicantProfilePage .freelancerBackground {
+    border: 1px solid #d5e0d5;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    text-align: left;
+}
+
+#applicantProfilePage .freelancerBackground .header {
+    padding: 25px 20px;
+}
+
+#applicantProfilePage .freelancerBackground .header .avatar {
+    margin-right: 30px;
+}
+
+#applicantProfilePage .freelancerBackground .header .avatar .img {
+    height: 60px;
+    width: 60px;
+}
+
+#applicantProfilePage .freelancerBackground .header .name .text {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: rgb(44, 44, 44);
+    margin-right: 10px;
+}
+
+#applicantProfilePage .freelancerBackground .left {
+    width: 25%;
+}
+
+#applicantProfilePage .freelancerBackground .left .element {
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+#applicantProfilePage .freelancerBackground .left .element .title .text {
+    font-weight: bold;
+    color: rgb(44, 44, 44);
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+
+#applicantProfilePage .freelancerBackground .left .element .content {
+    font-size: 0.9em;
+    color: gray;
+}
+
+#applicantProfilePage .freelancerBackground .right {
+    width: 75%;
+    border-left: 1px solid #d5e0d5;
+}
+
+#applicantProfilePage .freelancerBackground .right .element {
+    border-bottom: 1px solid #d5e0d5;
+    padding: 25px 20px;
+}
+
+#applicantProfilePage .freelancerBackground .right .element .title .text {
+    font-weight: bold;
+    color: rgb(44, 44, 44);
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+#applicantProfilePage .freelancerBackground .right .intro .introduce {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+    font-size: 0.95em;
+}
+
+#applicantProfilePage .freelancerBackground .right .skills .skillChips {
+    margin-top: 25px;
+}
+
+#applicantProfilePage .freelancerBackground .right .skills .skillChips .skillChip {
+    margin-right: 10px;
+    margin-bottom: 7px;
+}
+
+#applicantProfilePage .freelancerBackground .right .employmentHistory .expriences .experience {
+    border-bottom: 1px solid #d5e0d5;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+#applicantProfilePage .freelancerBackground .right .employmentHistory .expriences .experience .experienceTitle {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    color: rgb(44, 44, 44);
+}
+
+#applicantProfilePage .freelancerBackground .right .employmentHistory .expriences .experience .experienceTime {
+    color: gray;
+    font-size: 0.9em;
+}
+
+#applicantProfilePage .freelancerBackground .right .employmentHistory .expriences .experience .experienceDes {
+    font-size: 0.9em;
+}
+
+#applicantProfilePage .icon {
+    border: 0.5px #14A800 solid;
+    border-radius: 50%;
+    display: inline-block;
+    height: 27px;
+    width: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#applicantProfilePage .iconSvg {
+    font-size: 1em;
+}

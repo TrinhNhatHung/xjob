@@ -208,8 +208,10 @@ public class UserApi {
 	}
 
 	@GetMapping("/freelancer-info")
-	public ResponseEntity<?> getFreelancerInfo() {
-		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	public ResponseEntity<?> getFreelancerInfo(@RequestParam(name = "uid", required = false) String uid) {
+		if (uid == null) {
+			uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}
 		try {
 			User freelancer = userService.getById(uid);
 			if (freelancer == null) {
