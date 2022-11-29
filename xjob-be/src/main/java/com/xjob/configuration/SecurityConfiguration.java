@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/user/update-freelancer-skill", "/user/update-freelancer-experience",
 						"/user//delete-freelancer-experience").hasRole("FREELANCER")
 				.antMatchers("/user/verify-email", "/user/update-verify-code",
-						"/job/job-by-author", "/notification-list","/user/freelancer-info","/user/client-info").authenticated()
+						"/job/job-by-author","/job/best-matchs","/notification-list","/user/freelancer-info","/user/client-info").authenticated()
 				.antMatchers("/**").permitAll();
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 		http.cors();

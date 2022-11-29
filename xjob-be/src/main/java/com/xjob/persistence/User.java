@@ -84,4 +84,7 @@ public class User {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Experience> experiences;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<UserHistory> userHistories;
 }

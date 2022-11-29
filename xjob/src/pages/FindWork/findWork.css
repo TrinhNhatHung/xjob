@@ -1,3 +1,33 @@
+#findWorkPage .searchArea {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+#findWorkPage .search {
+    border: 1.5px solid #d5e0d5;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 35px;
+    width: calc(100% - 35px);
+    padding: 0px 20px;
+    outline: none;
+    font-family: sans-serif;
+    font-size: 0.95em;
+}
+
+#findWorkPage .searchIcon {
+    color: #fff;
+    background-color: #14a800;
+    width: 35px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #findWorkPage .title {
     width: 60%;
     text-align: left;
@@ -21,7 +51,27 @@
     padding: 10px 25px;
     font-family: sans-serif;
     font-size: 1.2em;
+}
+
+#findWorkPage .jobs .jobTabs {
+    font-family: sans-serif;
+    text-align: left;
+    padding: 0px 15px;
+    padding-bottom: 8px;
     border-bottom: 1px solid #d5e0d5;
+}
+
+#findWorkPage .jobs .jobTab {
+    padding: 0px 10px;
+    font-size: 0.96em;
+    color: gray;
+    padding-bottom: 8px;
+    cursor: pointer;
+}
+
+#findWorkPage .jobs .jobTab.active {
+    border-bottom: 2px solid rgb(58, 58, 58);
+    color: rgb(32, 32, 32);
 }
 
 #findWorkPage .jobs .loadMoreBtn {

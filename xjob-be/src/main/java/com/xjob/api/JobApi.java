@@ -65,6 +65,48 @@ public class JobApi {
 		}
 	}
 	
+	@GetMapping("/best-matchs")
+	public ResponseEntity<?> getBestMatchJobList(@RequestParam(name = "limit", required = false) Integer limit,
+			@RequestParam(name = "page", required = false) Integer page){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			List<Job> jobs = jobService.getBestMatch(uid,page, limit);
+			Map<String, Object> data = new HashMap<>();
+			Map<String, Object> result = new HashMap<>();
+			data.put("jobs", jobResponse.responseJobList(jobs));
+			result = ResponseUtil.createResponse(true, data, null);
+			return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<?> getJobBySearch (@RequestParam(name = "search") String search,
+										@RequestParam(name = "limit", required = false) Integer limit,
+										@RequestParam(name = "page", required = false) Integer page){
+		if (page == null) {
+			page = 1;
+		}
+		
+		if (limit == null) {
+			limit = 1;
+		}
+		
+		try {
+			List<Job> jobs = jobService.getBySearch(search, page, limit);
+			Map<String, Object> data = new HashMap<>();
+			Map<String, Object> result = new HashMap<>();
+			data.put("jobs", jobResponse.responseJobList(jobs));
+			result = ResponseUtil.createResponse(true, data, null);
+			return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@GetMapping("/job-detail")
 	public ResponseEntity<?> getJobDetail(@RequestParam(name = "jobId") Integer jobId){
 		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

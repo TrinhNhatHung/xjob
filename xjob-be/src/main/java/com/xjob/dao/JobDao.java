@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Repository;
 
+import com.xjob.constant.BusinessConst;
 import com.xjob.persistence.Job;
 
 @Repository
@@ -26,11 +27,9 @@ public class JobDao extends EntityDao<Job>{
 	public List<Job> get( Integer limit, Integer page){
 		final String SQL = "SELECT * FROM job\r\n"
 				+ "ORDER BY update_at desc\r\n"
-				+ "LIMIT :limit\r\n"
-				+ "offset :offset";
+				+ "LIMIT :limit";
 		NativeQuery<Job> query = openSession().createNativeQuery(SQL, Job.class)
-				.setParameter("limit", limit)
-				.setParameter("offset", (page - 1) * limit);
+				.setParameter("limit", page * limit);
 		return query.getResultList();
 	}
 	
@@ -47,5 +46,15 @@ public class JobDao extends EntityDao<Job>{
 		NativeQuery<String> query = openSession().createNativeQuery(SQL, String.class)
 				.setParameter("jobId", jobId);
 		return query.uniqueResult();
+	}
+	
+	public List<Job> getOpenJob(){
+		final String SQL = "SELECT * FROM xjob.job\r\n"
+				+ "JOIN job_status ON job_status.job_id = job.job_id\r\n"
+				+ "WHERE job_status.status_id = :statusId\r\n"
+				+ "ORDER BY job.update_at desc";
+		NativeQuery<Job> query = openSession().createNativeQuery(SQL, Job.class)
+				.setParameter("statusId", BusinessConst.JOB_STATUS_OPENED);
+		return query.getResultList();
 	}
 }
