@@ -204,13 +204,14 @@ public class JobService {
 	public List<Job> getBySearch(String search, Integer page, Integer limit){
 		List<Job> jobs = jobDao.getOpenJob();
 		List<Job> result = new ArrayList<>();
+		
 		for (Job job: jobs) {
 			String info = job.getTitle() + job.getDetail();
 			List<String> skills = job.getJobSkills().stream().map(s -> s.getSkill().getSkillName()).collect(Collectors.toList());
 			for (String skill : skills) {
 				info += skill;
 			}
-			if (info.indexOf(search) != -1 && search != "" && search != null) {
+			if (info.toLowerCase().indexOf(search.toLowerCase()) != -1 && search != "" && search != null) {
 				result.add(job);
 			}
 		}

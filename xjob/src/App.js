@@ -26,6 +26,7 @@ import ExperienceDialog from "./components/ExperienceDialog/ExperienceDialog";
 import EditMainSkillDialog from "./components/EditProfileDialog/EditMainSkillDialog";
 import EditNameDialog from "./components/EditProfileDialog/EditNameDialog";
 import ApplicantProfile from "./pages/ApplicantProfile/ApplicantProfile";
+import JobSearch from "./pages/JobSearch/JobSearch";
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ function App() {
             <Route path={`/client-info`} element={<ClientInfo />} />
             <Route path={`/freelancer-info`} element={<FreelancerInfo />} />
             <Route path={`/applicant-profile/:uid`} element={<ApplicantProfile />} />
+            <Route path={`/jobs/search`} element={<JobSearch />} />
             <Route path={`/no-authen`} element={<NoAuthen />} />
           </Routes>
         </div>

@@ -1,0 +1,129 @@
+#jobSearchPage .searchArea {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+#jobSearchPage .search {
+    border: 1.5px solid #d5e0d5;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 35px;
+    width: calc(100% - 35px);
+    padding: 0px 20px;
+    outline: none;
+    font-family: sans-serif;
+    font-size: 0.95em;
+}
+
+#jobSearchPage .searchIcon {
+    color: #fff;
+    background-color: #14a800;
+    width: 35px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#jobSearchPage .title {
+    width: 60%;
+    text-align: left;
+    margin: auto;
+    margin-bottom: 15px;
+    font-size: 1.6em;
+    font-family: sans-serif;
+}
+
+#jobSearchPage .jobs {
+    border: 1px solid #d5e0d5;
+    width: 60%;
+    margin: auto;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+#jobSearchPage .jobs .jobsTitle {
+    text-align: left;
+    padding: 10px 25px;
+    font-family: sans-serif;
+    font-size: 1.2em;
+}
+
+#jobSearchPage .jobs .jobTabs {
+    font-family: sans-serif;
+    text-align: left;
+    padding: 0px 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #d5e0d5;
+}
+
+#jobSearchPage .jobs .jobTab {
+    padding: 0px 10px;
+    font-size: 0.96em;
+    color: gray;
+    padding-bottom: 8px;
+    cursor: pointer;
+}
+
+#jobSearchPage .jobs .jobTab.active {
+    border-bottom: 2px solid rgb(58, 58, 58);
+    color: rgb(32, 32, 32);
+}
+
+#jobSearchPage .jobs .loadMoreBtn {
+    background-color: #fff;
+    color: #001e00;
+    border: #001e00 1px solid;
+    padding: 2px 20px;
+    border-radius: 50px;
+    font-family: sans-serif;
+    margin-top: 15px;
+}
+
+#jobSearchPage .jobs .loadMoreBtn:hover {
+    background-color: #e2ece2;
+}
+
+#jobSearchPage .jobs .jobsTitle.noPost {
+    border-bottom: none;
+}
+
+#jobSearchPage .jobs .emptyFileIcon {
+    width: 150px;
+    height: 105px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#jobSearchPage .jobs .text1 {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    color: rgb(53, 53, 53);
+}
+
+#jobSearchPage .jobs .text2 {
+    color: rgb(53, 53, 53);
+    font-family: sans-serif;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+#jobSearchPage .jobs .postJobBtn {
+    background-color: #14a800;
+    color: #fff;
+    width: 130px;
+    border-radius: 50px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+#jobSearchPage .jobs .postJobBtn:hover {
+    background-color: #3C8224;
+}
