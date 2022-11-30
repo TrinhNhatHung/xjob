@@ -27,6 +27,8 @@ import EditMainSkillDialog from "./components/EditProfileDialog/EditMainSkillDia
 import EditNameDialog from "./components/EditProfileDialog/EditNameDialog";
 import ApplicantProfile from "./pages/ApplicantProfile/ApplicantProfile";
 import JobSearch from "./pages/JobSearch/JobSearch";
+import HiringDialog from "./components/HiringDialog/HiringDialog";
+import Hired from "./pages/Hired/Hired";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +66,7 @@ function App() {
             <Route path="/verify-success" element={<VerifySuccess />} />
             <Route path={`/applicants/:jobId/applicants`} element={<Applicants />} />
             <Route path={`/applicants/:jobId/job-detail`} element={<JobDetail />} />
+            <Route path={`/applicants/:jobId/hired`} element={<Hired />} />
             <Route path={`/job-post`} element={<JobPost />} />
             <Route path={`/client-info`} element={<ClientInfo />} />
             <Route path={`/freelancer-info`} element={<FreelancerInfo />} />
@@ -78,6 +81,7 @@ function App() {
       <EditMainSkillDialog/>
       <EditNameDialog/>
       <ProposalDialog/>
+      <HiringDialog/>
     </div>
   );
 }

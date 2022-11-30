@@ -107,4 +107,43 @@ public class ProposalApi {
 			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PostMapping("/hiring")
+	public ResponseEntity<?> hiring(@RequestParam(name = "uid") String uid,
+			@RequestParam(name = "letter") String letter,
+			@RequestParam(name = "jobId") Integer jobId){
+		try {
+			Proposal proposal = new Proposal();
+			Id proposalId = new Id();
+			proposalId.setUid(uid);
+			proposalId.setJobId(jobId);
+			proposalId.setKind(BusinessConst.PROPOSAL_HIRED);
+			proposal.setProposalId(proposalId);
+			proposal.setLetter(letter);
+			
+			Job job = new Job();
+			job.setJobId(jobId);
+			User user =  new User();
+			user.setUid(uid);
+			proposal.setJob(job);
+			proposal.setUser(user);
+			
+			proposalService.insert(proposal);
+			
+//			Notification notification = new Notification();
+//			notification.setUidFrom(uid);
+//			job = jobService.getById(jobId);
+//			notification.setUidTo(job.getAuthorId().getUid());
+//			user = userService.getById(uid);
+//			String content = notificationUtil.createProposalNotification(user.getLastName(), job.getTitle());
+//			notification.setContent(content);
+//			notificationService.insert(notification);
+//			
+//			messagingTemplate.convertAndSend("/topic/notifications/" + job.getAuthorId().getUid(), content);
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

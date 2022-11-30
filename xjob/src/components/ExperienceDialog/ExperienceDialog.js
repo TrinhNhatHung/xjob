@@ -161,7 +161,7 @@ function ExperienceDialog() {
         <div className="btnGroup d-flex justify-content-end">
             <button className="btn btnSubmit" onClick={saveExperience}>Lưu</button>
             <button className="btn btnCancel" onClick={handleClose}>Huỷ</button>
-      </div>
+        </div>
     </Dialog>
   );
 }

@@ -15,8 +15,18 @@ import com.xjob.persistence.UserSkill;
 @Component
 public class UserResponse {
 	
+	public List<Map<String, Object>> responseFreelancerInfoList(List<User> users){
+		List<Map<String, Object>> result = new ArrayList<>();
+		for (User user : users) {
+			Map<String,Object> map = responseFreelancerInfo(user);
+			result.add(map);
+		}
+		return result;
+	}
+	
 	public Map<String, Object> responseFreelancerInfo(User user){
 		Map<String, Object> map = new HashMap<>();
+		map.put("uid", user.getUid());
 		map.put("email", user.getEmail());
 		map.put("firstName", user.getFirstName());
 		map.put("lastName", user.getLastName());

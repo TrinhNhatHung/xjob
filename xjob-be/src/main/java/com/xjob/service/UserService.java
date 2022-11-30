@@ -1,10 +1,16 @@
 package com.xjob.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xjob.constant.BusinessConst;
+import com.xjob.dao.ProposalDao;
 import com.xjob.dao.UserDao;
+import com.xjob.persistence.Proposal;
 import com.xjob.persistence.User;
 
 @Service
@@ -12,6 +18,9 @@ public class UserService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private ProposalDao proposalDao;
 	
 	public User getById(String uid) {
 		return userDao.getById(User.class, uid);
@@ -67,4 +76,9 @@ public class UserService {
 		userDao.updateFreelancerInfo(user);
 	}
 	
+	public List<User> getHiredUserByJob(Integer jobId){
+		List<Proposal> proposals = proposalDao.getProposalListByJobId(jobId, BusinessConst.PROPOSAL_HIRED);
+		List<User> hiredUsers = proposals.stream().map(Proposal::getUser).collect(Collectors.toList());
+		return hiredUsers;
+	}
 }

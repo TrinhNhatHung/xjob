@@ -1,13 +1,9 @@
+import { Avatar, Chip } from '@material-ui/core';
 import React from 'react';
-import './proposal.css';
-import Avatar from '@material-ui/core/Avatar';
-import { Chip } from '@material-ui/core';
 import {htmlToInlineText} from "../../util/HtmlTagUtil";
 import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
-import {openHiringDialog} from "../../reducer/hiringDialog";
 
-function Proposal(props) {
+function HiredUser(props) {
     const avatarStr = props.proposal.firstName.charAt(0) + props.proposal.lastName.charAt(0);
     var letter = "";
     if (props.proposal.letter !== null && props.proposal.letter !== undefined){
@@ -19,15 +15,6 @@ function Proposal(props) {
         event.preventDefault();
         navigate(`/applicant-profile/${uid}`);
     }
-
-    const dispatch = useDispatch();
-    const openHiringForm = ()=> {
-        dispatch(openHiringDialog({
-            uid: props.proposal.uid,
-            jobId: props.proposal.jobId
-        }));
-    }
-
     return (
         <div id="proposal" className="d-flex flex-row">
             <Avatar className="proposalAvatar">{avatarStr}</Avatar>
@@ -43,16 +30,12 @@ function Proposal(props) {
                     </span>
                     <div className="btnGroup">
                         <button className="button btnMessage">Nhắn tin</button>
-                        <button className="button btnHire" onClick={openHiringForm}>Thuê</button>
                     </div>
-                </div>
-                <div className="letter">
-                    <b>Thư giới thiệu</b> - {letter}
                 </div>
                 <div className="skills">
                     {
                         props.proposal.skills.map((skill,index)=> {
-                            return <Chip key={index} className="skill" label={skill} component="a" href="#chip" clickable />
+                            return <Chip key={index} className="skill" label={skill.skillName} component="a" href="#chip" clickable />
                         })
                     }
                 </div>
@@ -61,4 +44,4 @@ function Proposal(props) {
     );
 }
 
-export default Proposal;
+export default HiredUser;

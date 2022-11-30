@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xjob.persistence.Job;
 import com.xjob.persistence.User;
 import com.xjob.response.JobResponse;
+import com.xjob.response.UserResponse;
 import com.xjob.service.JobService;
+import com.xjob.service.UserService;
 import com.xjob.util.ResponseUtil;
 
 @RestController
@@ -30,7 +32,13 @@ public class JobApi {
 	private JobService jobService;
 	
 	@Autowired
+	private UserService userService;
+	
+	@Autowired
 	private JobResponse jobResponse;
+	
+	@Autowired
+	private UserResponse userResponse;
 	
 	@GetMapping("/job-by-author")
 	public ResponseEntity<?> getJobListByAuthor(@RequestParam(name = "limit", required = false) Integer limit,
@@ -157,6 +165,20 @@ public class JobApi {
 			Integer insertedJobId = jobService.postjob(job, skills);
 			Map<String, Object> result = new HashMap<>();
 			result.put("jobId", insertedJobId);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/hirings")
+	public ResponseEntity<?> getHiringByJob(@RequestParam(name = "jobId") Integer jobId){
+		try {
+			List<User> users = userService.getHiredUserByJob(jobId);
+			List<Map<String, Object>>data = userResponse.responseFreelancerInfoList(users);
+			Map<String, Object> result = new HashMap<>();
+			result.put("users", data);
 			return new ResponseEntity<Object>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
