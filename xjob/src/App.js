@@ -29,6 +29,8 @@ import ApplicantProfile from "./pages/ApplicantProfile/ApplicantProfile";
 import JobSearch from "./pages/JobSearch/JobSearch";
 import HiringDialog from "./components/HiringDialog/HiringDialog";
 import Hired from "./pages/Hired/Hired";
+import DashBoard from "./pages/Admin/DashBoard";
+import ManageAccount from "./pages/Admin/ManageAccount";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +74,8 @@ function App() {
             <Route path={`/freelancer-info`} element={<FreelancerInfo />} />
             <Route path={`/applicant-profile/:uid`} element={<ApplicantProfile />} />
             <Route path={`/jobs/search`} element={<JobSearch />} />
+            <Route path={`/admin/dashboard`} element={<DashBoard />} />
+            <Route path={`/admin/manage-account`} element={<ManageAccount />} />
             <Route path={`/no-authen`} element={<NoAuthen />} />
           </Routes>
         </div>

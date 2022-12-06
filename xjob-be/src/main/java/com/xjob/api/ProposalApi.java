@@ -112,6 +112,7 @@ public class ProposalApi {
 	public ResponseEntity<?> hiring(@RequestParam(name = "uid") String uid,
 			@RequestParam(name = "letter") String letter,
 			@RequestParam(name = "jobId") Integer jobId){
+		String uidFrom = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try {
 			Proposal proposal = new Proposal();
 			Id proposalId = new Id();
@@ -130,16 +131,16 @@ public class ProposalApi {
 			
 			proposalService.insert(proposal);
 			
-//			Notification notification = new Notification();
-//			notification.setUidFrom(uid);
-//			job = jobService.getById(jobId);
-//			notification.setUidTo(job.getAuthorId().getUid());
-//			user = userService.getById(uid);
-//			String content = notificationUtil.createProposalNotification(user.getLastName(), job.getTitle());
-//			notification.setContent(content);
-//			notificationService.insert(notification);
-//			
-//			messagingTemplate.convertAndSend("/topic/notifications/" + job.getAuthorId().getUid(), content);
+			Notification notification = new Notification();
+			notification.setUidFrom(uidFrom);
+			notification.setUidTo(uid);
+			user = userService.getById(uidFrom);
+			job = jobService.getById(jobId);
+			String content = notificationUtil.createHiringNotification(user.getLastName(), job.getTitle());
+			notification.setContent(content);
+			notificationService.insert(notification);
+			
+			messagingTemplate.convertAndSend("/topic/notifications/" + uid, content);
 			return new ResponseEntity<Object>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

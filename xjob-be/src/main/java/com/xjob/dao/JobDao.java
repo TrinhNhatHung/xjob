@@ -57,4 +57,10 @@ public class JobDao extends EntityDao<Job>{
 				.setParameter("statusId", BusinessConst.JOB_STATUS_OPENED);
 		return query.getResultList();
 	}
+	
+	public Integer count() {
+		final String SQL = "SELECT * FROM job";
+		NativeQuery<Job> query =openSession().createNativeQuery(SQL, Job.class);
+		return query.getResultList().size();
+	}
 }

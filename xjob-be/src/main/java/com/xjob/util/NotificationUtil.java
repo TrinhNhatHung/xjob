@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 public class NotificationUtil {
 	
 	public String createProposalNotification(String uidFromLastName, String jobTitle) {
-		return uidFromLastName + " want to apply for " + "\"" + jobTitle + "\"";
+		return uidFromLastName + " muốn ứng tuyển vào dự án " + "\"" + jobTitle + "\"";
+	}
+	
+	public String createHiringNotification (String uidFromLastName, String jobTitle) {
+		return uidFromLastName + " đồng ý cho bạn  tham gia dự án " + "\"" + jobTitle + "\"";
 	}
 }

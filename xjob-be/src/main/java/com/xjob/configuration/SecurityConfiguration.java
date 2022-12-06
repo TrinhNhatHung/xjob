@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/proposal/post-proposal", "/user/update-freelancer-info",
 						"/user/update-freelancer-skill", "/user/update-freelancer-experience",
 						"/user//delete-freelancer-experience").hasRole("FREELANCER")
+//				.antMatchers("/user/accounts", "/user/toggle-account").hasRole("ADMIN")
 				.antMatchers("/user/verify-email", "/user/update-verify-code",
 						"/job/job-by-author","/job/best-matchs","/notification-list","/user/freelancer-info","/user/client-info").authenticated()
 				.antMatchers("/**").permitAll();

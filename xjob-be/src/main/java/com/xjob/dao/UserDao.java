@@ -1,5 +1,7 @@
 package com.xjob.dao;
 
+import java.util.List;
+
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Repository;
 
@@ -7,6 +9,17 @@ import com.xjob.persistence.User;
 
 @Repository
 public class UserDao extends EntityDao<User>{
+	
+	public List<User> get(Integer page, Integer limit){
+		final String SQL = "SELECT * FROM user\r\n"
+				+ "ORDER BY update_at desc\r\n"
+				+ "LIMIT :limit\r\n"
+				+ "offset :offset";
+		NativeQuery<User> query = openSession().createNativeQuery(SQL, User.class)
+							.setParameter("limit", limit)
+							.setParameter("offset", (page -1 ) * limit);
+		return query.getResultList();
+	}
 	
 	public User getByEmail (String email) {
 		final String SQL = "SELECT * FROM user WHERE email = :email";
@@ -82,5 +95,25 @@ public class UserDao extends EntityDao<User>{
 		
 		query.setParameter("uid", user.getUid());
 		query.executeUpdate();
+	}
+	
+	public void updateStatus(String uid, Boolean status) {
+		final String SQL = "UPDATE user SET status = :status WHERE uid =:uid";
+		NativeQuery<User> query = getCurrentSession().createNativeQuery(SQL, User.class)
+								.setParameter("status", status)
+								.setParameter("uid", uid);
+		query.executeUpdate();
+	}
+	
+	public Integer countFreelancer() {
+		final String SQL = "SELECT * FROM user  WHERE role_id = 2";
+		NativeQuery<User> query = openSession().createNativeQuery(SQL, User.class);
+		return query.getResultList().size();
+	}
+	
+	public Integer countClient() {
+		final String SQL = "SELECT * FROM user  WHERE role_id = 1";
+		NativeQuery<User> query = openSession().createNativeQuery(SQL, User.class);
+		return query.getResultList().size();
 	}
 }

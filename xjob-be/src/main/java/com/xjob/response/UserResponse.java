@@ -41,7 +41,8 @@ public class UserResponse {
 		
 		List<Experience> experiences = user.getExperiences();
 		map.put("experiences", experiences);
-		
+		map.put("role", user.getRole().getRoleName());
+		map.put("status", user.getStatus());
 		return map;
 	}
 	

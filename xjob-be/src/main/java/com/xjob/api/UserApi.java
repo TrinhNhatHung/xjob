@@ -66,7 +66,7 @@ public class UserApi {
 				data.put("role", user.getRole().getRoleName());
 				data.put("email", user.getEmail());
 				data.put("lastName", user.getLastName());
-				data.put("firstName", user.getLastName());
+				data.put("firstName", user.getFirstName());
 				data.put("uid", user.getUid());
 				Map<String, Object> result = new HashMap<String, Object>();
 				result = ResponseUtil.createResponse(true, data, null);
@@ -324,6 +324,40 @@ public class UserApi {
 			Map<String, Object> result = new HashMap<>();
 			result.put("clientInfo", data);
 			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/accounts")
+	public ResponseEntity<?> getAccounts(@RequestParam(name = "page", required = false) Integer page,
+					@RequestParam(name = "limit", required = false) Integer limit){
+		if (page == null) {
+			page = 1;
+		}
+		
+		if (limit == null) {
+			limit = 10;
+		}
+		try {
+			List<User> users = userService.get(page, limit);
+			List<Map<String, Object>> data = userResponse.responseFreelancerInfoList(users);
+			Map<String, Object> result = new HashMap<>();
+			result.put("accounts", data);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/toggle-account")
+	public ResponseEntity<?> toggleAccount (@RequestParam(name = "uid") String uid,
+							@RequestParam(name = "status") Boolean status){
+		try {
+			userService.updateStatus(uid, status);
+			return new ResponseEntity<Object>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);

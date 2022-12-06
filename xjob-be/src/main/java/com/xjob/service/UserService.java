@@ -22,6 +22,10 @@ public class UserService {
 	@Autowired
 	private ProposalDao proposalDao;
 	
+	public List<User> get(Integer page, Integer limit){
+		return userDao.get(page, limit);
+	}
+	
 	public User getById(String uid) {
 		return userDao.getById(User.class, uid);
 	}
@@ -80,5 +84,10 @@ public class UserService {
 		List<Proposal> proposals = proposalDao.getProposalListByJobId(jobId, BusinessConst.PROPOSAL_HIRED);
 		List<User> hiredUsers = proposals.stream().map(Proposal::getUser).collect(Collectors.toList());
 		return hiredUsers;
+	}
+	
+	@Transactional
+	public void updateStatus(String uid, Boolean status) {
+		userDao.updateStatus(uid, status);
 	}
 }

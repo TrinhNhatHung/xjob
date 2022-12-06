@@ -100,17 +100,25 @@ function Header() {
     }
   };
 
+  const seeAllNotification = ()=> {
+    setHasNotification({
+      ...hasNotification,
+      status: false,
+      content: null
+    })
+  }
+
   const renderHeaderRight = () => {
     if (user.isAuthen) {
       return (
         <ul className="headerRight nav">
           <div className="dropdown">
             {
-              hasNotification.status ? <Badge className="btnIcon dropdown-toggle" data-bs-toggle="dropdown" badgeContent="" color="error">
+              hasNotification.status ? <Badge onClick={seeAllNotification} className="btnIcon dropdown-toggle" data-bs-toggle="dropdown" badgeContent="" color="error">
                 <NotificationsNoneIcon className="headerIcon" fontSize="small" />
               </Badge>
               :
-              <Badge className="btnIcon dropdown-toggle" data-bs-toggle="dropdown" color="error">
+              <Badge onClick={seeAllNotification} className="btnIcon dropdown-toggle" data-bs-toggle="dropdown" color="error">
                 <NotificationsNoneIcon className="headerIcon" fontSize="small" />
               </Badge>
             }
@@ -178,7 +186,9 @@ function Header() {
     if (
       location.pathname !== "/login" &&
       location.pathname !== "/signup" &&
-      location.pathname !== "/signup/verify-email"
+      location.pathname !== "/signup/verify-email" &&
+      location.pathname !== "/admin/dashboard" &&
+      location.pathname !== "/admin/manage-account"
     ) {
       return (
         <div id="header">
