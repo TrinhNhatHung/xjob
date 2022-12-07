@@ -74,3 +74,8 @@
     font-size: 0.95em;
     color: grey;
 }
+
+#dashboardPage .content .chart {
+    width: 90%;
+    margin: auto;
+}

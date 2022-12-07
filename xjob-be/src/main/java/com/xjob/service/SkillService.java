@@ -1,6 +1,7 @@
 package com.xjob.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class SkillService {
 		for (Integer skillId : skillIds) {
 			userSkillDao.insert(uid, skillId);
 		}
+	}
+	
+	public List<Map<String, Object>> getMostSkil(){
+		return skillDao.getMostSkill();
 	}
 }
