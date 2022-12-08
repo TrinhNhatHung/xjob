@@ -1,6 +1,9 @@
 package com.xjob.dao;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.Tuple;
 
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Repository;
@@ -16,6 +19,13 @@ public class ProposalDao extends EntityDao<Proposal>{
 					.setParameter("jobId", jobId)
 					.setParameterList("kinds", kinds);
 		return query.getResultList();
+	}
+	
+	public List<Integer> getDistinctJobIdByUid(String uid){
+		final String SQL = "SELECT DISTINCT job_id FROM proposal WHERE uid = :uid";
+		NativeQuery<Tuple> query = openSession().createNativeQuery(SQL, Tuple.class)
+									.setParameter("uid", uid);
+		return query.getResultList().stream().map(tu -> (Integer)tu.get("job_id")).collect(Collectors.toList());
 	}
 	
 }

@@ -76,9 +76,17 @@ public class JobApi {
 	@GetMapping("/best-matchs")
 	public ResponseEntity<?> getBestMatchJobList(@RequestParam(name = "limit", required = false) Integer limit,
 			@RequestParam(name = "page", required = false) Integer page){
+		
+		if (page == null) {
+			page = 1;
+		}
+		
+		if (limit == null) {
+			limit = 3;
+		}
 		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try {
-			List<Job> jobs = jobService.getBestMatch(uid,page, limit);
+			List<Job> jobs = jobService.getBestMatch(uid, page, limit);
 			Map<String, Object> data = new HashMap<>();
 			Map<String, Object> result = new HashMap<>();
 			data.put("jobs", jobResponse.responseJobList(jobs));
@@ -99,7 +107,7 @@ public class JobApi {
 		}
 		
 		if (limit == null) {
-			limit = 1;
+			limit = 10;
 		}
 		
 		try {

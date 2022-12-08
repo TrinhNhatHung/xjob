@@ -89,5 +89,32 @@ public class Job {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
 	private List<Proposal> proposals;
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+	    if (!(o instanceof Job)) {
+	    	return false;
+	    }
+	    
+	    Job that = (Job)o;
+	    return this.getJobId().equals(that.getJobId());
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.jobId.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "Job [jobId=" + jobId + ", title=" + title + ", detail=" + detail + ", hireAmount=" + hireAmount
+				+ ", hiredAmount=" + hiredAmount + ", paymentKind=" + paymentKind + ", termClass=" + termClass
+				+ ", termFrom=" + termFrom + ", termTo=" + termTo + ", hourPerWeek=" + hourPerWeek + ", price=" + price
+				+ ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
+	}
+	
 	
 }

@@ -1,5 +1,12 @@
 package com.xjob.dao;
 
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.Tuple;
+
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +21,19 @@ public class JobSkillDao extends EntityDao<JobSkill>{
 					.setParameter("jobId", jobSkill.getJobSkillId().getJobId())
 					.setParameter("skillId", jobSkill.getJobSkillId().getSkillId());
 		query.executeUpdate();
+	}
+	
+	public Map<Integer, Integer> getBestMatchMatrix(List<Integer> jobIds){
+		final String SQL = "SELECT skill_id, COUNT(job_id) AS COUNT_JOB FROM job_skill WHERE job_id IN (:jobIds) GROUP BY skill_id";
+		NativeQuery<Tuple> query = openSession().createNativeQuery(SQL, Tuple.class)
+						.setParameter("jobIds", jobIds);
+		List<Tuple> resultSet = query.getResultList();
+		Map<Integer, Integer> bestMatchMatrix = new HashMap<>();
+		for (Tuple tuple : resultSet) {
+			Integer skillId = (Integer)tuple.get("skill_id");
+			Integer weighing = ((BigInteger)tuple.get("COUNT_JOB")).intValue();
+			bestMatchMatrix.put(skillId, weighing);
+		}
+		return bestMatchMatrix;
 	}
 }
