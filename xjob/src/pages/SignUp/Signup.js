@@ -101,28 +101,28 @@ function Signup() {
     if (input.email === null || input.email === undefined || input.email === "" ){
       validateLogin = false;
       emailInput.current.classList.add("borderError");
-      emailCheck = "Email is required";
+      emailCheck = "Email đã tồn tại";
     }
 
     let passwordCheck = null;
     if (input.password === null || input.password === undefined || input.password === "" ){
       validateLogin = false;
       passwordInput.current.classList.add("borderError");
-      passwordCheck = "Password is required";
+      passwordCheck = "Mặt khẩu là bắt buộc";
     }
 
     let firstNameCheck = null;
     if (input.firstName === null || input.firstName === undefined || input.firstName === "" ){
       validateLogin = false;
       firstNameInput.current.classList.add("borderError");
-      firstNameCheck = "First name is required";
+      firstNameCheck = "Tên là bắt buộc";
     }
 
     let lastNameCheck = null;
     if (input.lastName === null || input.lastName === undefined || input.lastName === "" ){
       validateLogin = false;
       lastNameInput.current.classList.add("borderError");
-      lastNameCheck = "Last name is required";
+      lastNameCheck = "Họ là bắt buộc";
     }
 
     setErrorInput({
@@ -178,14 +178,14 @@ function Signup() {
             } else {
               setErrorInput({
                 ...errorInput,
-                password: "Email is existing"
+                password: "Email đã tồn tại"
               });
             }
           })
           .catch(function (err) {
             setErrorInput({
               ...errorInput,
-              password: "Sign up failed ( System error )"
+              password: "Đăng ký thất bại ( Lỗi hệ thống )"
             });
           });
       })
@@ -193,17 +193,17 @@ function Signup() {
         if(error.code === "auth/email-already-in-use"){
           setErrorInput({
             ...errorInput,
-            password: "Email is existing"
+            password: "Email đã tồn tại"
           });
         } else if (error.code === "auth/weak-password"){
           setErrorInput({
             ...errorInput,
-            password: "Password is so weak"
+            password: "Password quá yếu"
           });
         } else {
           setErrorInput({
             ...errorInput,
-            password: "Sign up failed"
+            password: "Đăng ký thất bại"
           });
         }
       });

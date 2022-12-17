@@ -417,7 +417,7 @@ function JobPost() {
             className="formItemInput"
             onChange={changeInput}
           />
-          <span className="currency">$</span>
+          <span className="currency">VND</span>
         </div>
         <span className="errorInput">{error.price}</span>
       </div>

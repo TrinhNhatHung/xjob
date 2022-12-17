@@ -100,7 +100,7 @@ function Login() {
           setError({
             ...error,
             email: null,
-            password: "Incorrect email or password",
+            password: "Email hoặc mật khẩu không đúng",
           });
         });
     }

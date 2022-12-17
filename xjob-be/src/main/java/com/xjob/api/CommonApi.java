@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xjob.service.CommonService;
@@ -16,7 +15,6 @@ import com.xjob.service.SkillService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/common")
 public class CommonApi {
 	
 	@Autowired
@@ -25,7 +23,12 @@ public class CommonApi {
 	@Autowired
 	private SkillService skillService;
 	
-	@GetMapping("/dashboard")
+	@GetMapping("/")
+	public String home() {
+		return "OK";
+	}
+	
+	@GetMapping("/common/dashboard")
 	public ResponseEntity<?> getDashboard(){
 		try {
 			Map<String,Object> map = commonService.getDashboard();

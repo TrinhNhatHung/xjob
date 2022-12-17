@@ -7,8 +7,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableWebMvc
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
-public class XjobBeApplication {
-
+public class XjobBeApplication{
+	
 	public static void main(String[] args) {
 		SpringApplication.run(XjobBeApplication.class, args);
 	}
