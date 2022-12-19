@@ -1,6 +1,6 @@
 import { Chip } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ApplicantHeader from "../../components/ApplicantHeader/ApplicantHeader";
 import "./jobDetail.css";
 import { BusinessConst } from "../../constant/BusinessConst";
@@ -11,6 +11,9 @@ import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import axiosRequireAuthor from "../../api/axiosRequiredAuthor";
+import { useDispatch } from "react-redux";
+import {openJobDialog} from "../../reducer/editJobDialog";
+import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
 
 function JobDetail() {
   const { jobId } = useParams();
@@ -84,6 +87,29 @@ function JobDetail() {
     }
   };
 
+  const dispatch = useDispatch();
+  const openEditJobDialog = (event)=> {
+    event.preventDefault();
+    dispatch(openJobDialog({
+      job: job
+    }));
+  }
+
+  const navigate = useNavigate();
+  const deleteJob = (event)=> {
+    event.preventDefault();
+    let check = window.confirm("Bạn có chắc muốn xoá công việc này?");
+    if (check){
+      axiosRequiredAuthor.post(`/job/delete/${jobId}`)
+      .then(()=> {
+        navigate("/client/dashboard");
+      })
+      .catch(()=> {
+        alert("Bị lỗi không thể xoá bằng đăng tin công việc này.");
+      })
+    }
+  }
+
   return (
     <div id="jobDetailPage">
       <ApplicantHeader jobId={jobId} />
@@ -100,7 +126,7 @@ function JobDetail() {
                   <Chip
                     key={index}
                     className="skill"
-                    label={skill}
+                    label={skill.skillName}
                     component="a"
                     href="#chip"
                     clickable
@@ -113,11 +139,11 @@ function JobDetail() {
         <div className="jobActions">
           <div className="jobAction">
             <EditIcon className="actionIcon" />
-            <a className="actionText" href="/applicants/1/job-detail/edit">Cập nhật bài đăng</a>
+            <a className="actionText" href="#" onClick={openEditJobDialog}>Cập nhật bài đăng</a>
           </div>
           <div className="jobAction">
             <CloseIcon className="actionIcon"/>
-            <a className="actionText" href="/applicants/1/job-detail/edit">Xoá bài đăng</a>
+            <a className="actionText" href="#" onClick={deleteJob}>Xoá bài đăng</a>
           </div>
         </div>
       </div>

@@ -31,6 +31,7 @@ import HiringDialog from "./components/HiringDialog/HiringDialog";
 import Hired from "./pages/Hired/Hired";
 import DashBoard from "./pages/Admin/DashBoard";
 import ManageAccount from "./pages/Admin/ManageAccount";
+import EditJobDialog from "./components/EditJobDialog.js/EditJobDialog";
 
 function App() {
   const dispatch = useDispatch();
@@ -86,6 +87,7 @@ function App() {
       <EditNameDialog/>
       <ProposalDialog/>
       <HiringDialog/>
+      <EditJobDialog/>
     </div>
   );
 }

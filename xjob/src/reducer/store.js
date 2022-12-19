@@ -6,6 +6,7 @@ import editSkillDialog from "../reducer/editSkillDialog";
 import experienceDialog from "../reducer/experienceDialog";
 import profileDialog from "../reducer/editProfileDialog";
 import hiringDialog from "../reducer/hiringDialog";
+import jobDialog from "../reducer/editJobDialog.js";
 
 const rootReducer = {
     user,
@@ -14,7 +15,8 @@ const rootReducer = {
     editSkillDialog,
     experienceDialog,
     profileDialog,
-    hiringDialog
+    hiringDialog,
+    jobDialog
 };
 
 const store = configureStore({

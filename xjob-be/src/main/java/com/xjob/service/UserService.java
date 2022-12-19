@@ -30,13 +30,13 @@ public class UserService {
 		return userDao.getById(User.class, uid);
 	}
 	
-	public User checkLogin(String uid) {
-		User user = userDao.getById(User.class, uid);
+	public User checkLogin(String email, String password) {
+		User user = userDao.getByEmail(email);
 		if (user == null) {
 			return null;
 		}
 		
-		if (user.getStatus()) {
+		if (password.equals(user.getPassword())) {
 			return user;
 		}
 		

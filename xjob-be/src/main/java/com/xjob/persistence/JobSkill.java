@@ -23,12 +23,12 @@ public class JobSkill {
 	@EmbeddedId
 	private Id jobSkillId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("jobId")
 	@JoinColumn(name = "job_id", referencedColumnName = "job_id")
 	private Job job;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("skillId")
 	@JoinColumn(name = "skill_id", referencedColumnName = "skill_id")
 	private Skill skill;

@@ -18,9 +18,11 @@ public class BusinessConst {
 	
 	public static final String PROPOSAL_HIRED = "2";
 	
-	public static final Integer JOB_STATUS_OPENED = 1;
+	public static final Integer JOB_STATUS_OPEN = 1;
 	
-	public static final Integer JOB_STATUS_CLOSED = 2;
+	public static final Integer JOB_STATUS_COMPLETE = 2;
+	
+	public static final Integer JOB_STATUS_CLOSE = 3;
 	
 	public static final String USER_HISTORY_KIND_SKILL = "SKILL";
 	

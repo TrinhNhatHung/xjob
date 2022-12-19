@@ -3,6 +3,7 @@ package com.xjob.api;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,10 +50,11 @@ public class UserApi {
 	@Autowired
 	private UserResponse userResponse;
 
-	@GetMapping("/check-login")
-	public ResponseEntity<?> checkLogin(@RequestParam(name = "uid") String uid) {
+	@PostMapping("/check-login")
+	public ResponseEntity<?> checkLogin(@RequestParam(name = "email") String email,
+						@RequestParam(name = "password") String password) {
 		try {
-			User user = userService.checkLogin(uid);
+			User user = userService.checkLogin(email, password);
 			if (user != null) {
 				Map<String, Object> jwtClaim = new HashMap<>();
 				jwtClaim.put("uid", user.getUid());
@@ -85,7 +87,7 @@ public class UserApi {
 	public ResponseEntity<?> rememberLogin() {
 		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try {
-			User user = userService.checkLogin(uid);
+			User user = userService.getById(uid);
 			if (user != null) {
 				Map<String, Object> jwtClaim = new HashMap<>();
 				jwtClaim.put("uid", user.getUid());
@@ -114,11 +116,11 @@ public class UserApi {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<?> signupAccount(@RequestParam(name = "uid") String uid,
-			@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName,
+	public ResponseEntity<?> signupAccount(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName,
 			@RequestParam(name = "email") String email, @RequestParam(name = "password") String password,
 			@RequestParam(name = "role") String roleName) {
 		try {
+			String uid = UUID.randomUUID().toString();
 			User user = new User();
 			user.setUid(uid);
 			user.setEmail(email);

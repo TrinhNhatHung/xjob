@@ -1,6 +1,7 @@
 package com.xjob.dao;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,9 @@ public class JobDao extends EntityDao<Job>{
 				.setParameter("authorId", uid)
 				.setParameter("limit", limit)
 				.setParameter("offset", (page - 1) * limit);
-		return query.getResultList();
+		List<Job> jobs = query.getResultList();
+		jobs = jobs.stream().filter(t -> t.getJobStatus().size() <= 1).collect(Collectors.toList());
+		return jobs;
 	}
 	
 	public List<Job> get( Integer limit, Integer page){
@@ -54,7 +57,7 @@ public class JobDao extends EntityDao<Job>{
 				+ "WHERE job_status.status_id = :statusId\r\n"
 				+ "ORDER BY job.update_at desc";
 		NativeQuery<Job> query = openSession().createNativeQuery(SQL, Job.class)
-				.setParameter("statusId", BusinessConst.JOB_STATUS_OPENED);
+				.setParameter("statusId", BusinessConst.JOB_STATUS_OPEN);
 		return query.getResultList();
 	}
 	

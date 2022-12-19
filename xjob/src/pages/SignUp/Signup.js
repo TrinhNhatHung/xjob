@@ -3,15 +3,11 @@ import "./signUp.css";
 import freelancerIcon from "../../images/freelancer_icon.svg";
 import clientIcon from "../../images/client_icon.svg";
 import { useNavigate } from "react-router";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../app/firebase_config";
 import axiosClient from "../../api/axiosClient";
 import BusinessConst from "../../app/constant";
 import ErrorIcon from "@mui/icons-material/Error";
 import { useDispatch } from "react-redux";
 import {signup} from '../../reducer/userSlice';
-import randomCode from '../../util/RandomCode';
-import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
 
 function Signup() {
   const navigate = useNavigate();
@@ -133,18 +129,14 @@ function Signup() {
     })
 
     if (validateLogin){
-      createUserWithEmailAndPassword(auth, input.email, input.password)
-      .then((userCredential) => {
-        let uid = userCredential.user.uid;
         axiosClient
           .post("/user/signup", null, {
             params : {
-              uid,
               firstName: input.firstName,
               lastName: input.lastName,
               email: input.email,
               password: input.password,
-              role: selectedRole,
+              role: selectedRole
             }
           })
           .then(function (response) {
@@ -160,21 +152,8 @@ function Signup() {
                 token:response.data.token,
                 role:response.data.role
               }))
-              let verifyCode = randomCode(5);
-              axiosRequiredAuthor.post("/user/update-verify-code",null,{
-                params: {
-                  verifyCode: verifyCode
-                }
-              }).catch(()=>{});
-              let origin = window.location.origin;
-              let actionCodeSetting = {
-                url: `${origin}/verify-success?verifyCode=${verifyCode}`,
-                handleCodeInApp: true
-              };
-              auth.currentUser.sendEmailVerification(actionCodeSetting).then(()=>{
-              }).catch(()=>{
-              });  
-              navigate("/signup/verify-email");
+              
+              navigate("/login");
             } else {
               setErrorInput({
                 ...errorInput,
@@ -185,28 +164,9 @@ function Signup() {
           .catch(function (err) {
             setErrorInput({
               ...errorInput,
-              password: "Đăng ký thất bại ( Lỗi hệ thống )"
+              password: "Đăng ký thất bại"
             });
           });
-      })
-      .catch((error) => {
-        if(error.code === "auth/email-already-in-use"){
-          setErrorInput({
-            ...errorInput,
-            password: "Email đã tồn tại"
-          });
-        } else if (error.code === "auth/weak-password"){
-          setErrorInput({
-            ...errorInput,
-            password: "Password quá yếu"
-          });
-        } else {
-          setErrorInput({
-            ...errorInput,
-            password: "Đăng ký thất bại"
-          });
-        }
-      });
     }
   };
 

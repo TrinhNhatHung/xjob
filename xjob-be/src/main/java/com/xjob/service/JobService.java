@@ -12,14 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xjob.constant.BusinessConst;
 import com.xjob.dao.JobDao;
 import com.xjob.dao.JobSkillDao;
+import com.xjob.dao.JobStatusDao;
 import com.xjob.dao.ProposalDao;
 import com.xjob.dao.SkillDao;
 import com.xjob.persistence.Job;
 import com.xjob.persistence.JobSkill;
 import com.xjob.persistence.JobSkill.Id;
+import com.xjob.persistence.JobStatus;
 import com.xjob.persistence.Skill;
+import com.xjob.persistence.Status;
 import com.xjob.persistence.User;
 
 @Service
@@ -36,6 +40,9 @@ public class JobService {
 
 	@Autowired
 	private ProposalDao proposalDao;
+	
+	@Autowired
+	private JobStatusDao jobStatusDao;
 	
 	@Autowired
 	private UserService userService;
@@ -71,32 +78,46 @@ public class JobService {
 	}
 
 	@Transactional
-	public Integer postjob(Job job, List<String> skills) {
-		List<Integer> skillIds = new ArrayList<>();
-		for (String skillName : skills) {
-			Skill skill = skillDao.getBySkillName(skillName);
-			if (skill == null) {
-				skill = new Skill();
-				skill.setSkillName(skillName);
-				Integer insertedId = (Integer) skillDao.insert(skill);
-				skillIds.add(insertedId);
-			} else {
-				skillIds.add(skill.getSkillId());
-			}
-		}
+	public Integer postjob(Job job, List<Skill> skills) {
 
 		Integer jobId = (Integer) jobDao.insert(job);
+		
+		JobStatus jobStatus = new JobStatus();
+		job.setJobId(jobId);
+		jobStatus.setJob(job);
+		Status status = new Status();
+		status.setStatusId(BusinessConst.JOB_STATUS_OPEN);
+		jobStatus.setStatus(status);
+		com.xjob.persistence.JobStatus.Id id = new com.xjob.persistence.JobStatus.Id();
+		id.setJobId(jobId);
+		id.setStatusId(BusinessConst.JOB_STATUS_OPEN);
+		jobStatus.setJobStatusId(id);
+		jobStatusDao.insert(jobStatus);
 
-		for (Integer skillId : skillIds) {
+		for (Skill skill : skills) {
 			JobSkill jobSkill = new JobSkill();
 			Id jobSkillId = new Id();
-			jobSkillId.setJobId(jobId);
-			jobSkillId.setSkillId(skillId);
+			jobSkillId.setJobId(job.getJobId());
+			jobSkillId.setSkillId(skill.getSkillId());
 			jobSkill.setJobSkillId(jobSkillId);
 			jobSkillDao.insertNativeQuery(jobSkill);
 		}
 
 		return jobId;
+	}
+	
+	@Transactional
+	public void updateJob(Job job, List<Skill> skills) {
+		jobDao.insertOrUpdate(job);
+		jobSkillDao.deleteByJobId(job.getJobId());
+		for (Skill skill : skills) {
+			JobSkill jobSkill = new JobSkill();
+			Id jobSkillId = new Id();
+			jobSkillId.setJobId(job.getJobId());
+			jobSkillId.setSkillId(skill.getSkillId());
+			jobSkill.setJobSkillId(jobSkillId);
+			jobSkillDao.insertNativeQuery(jobSkill);
+		}
 	}
 
 	public Job getById(Integer jobId) {
@@ -171,5 +192,10 @@ public class JobService {
 			result = result.subList(0, result.size());
 		}
 		return result;
+	}
+	
+	@Transactional
+	public void closeJob(Integer jobId) {
+		jobStatusDao.closeJob(jobId);
 	}
 }

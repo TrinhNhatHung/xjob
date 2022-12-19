@@ -1,20 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./jobPost.css";
-import axiosClient from "../../api/axiosClient";
-import Chip from "@mui/material/Chip";
-import CloseIcon from "@mui/icons-material/Close";
+import React, { useEffect } from "react";
+import "./editJobDialog.css";
+import Dialog from "@mui/material/Dialog";
+import { useDispatch, useSelector } from "react-redux";
+import { closeJobDialog } from "../../reducer/editJobDialog";
+import { useRef } from "react";
+import { useState } from "react";
 import { BusinessConst } from "../../constant/BusinessConst";
 import SellIcon from "@mui/icons-material/Sell";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { useNavigate } from "react-router";
+import CloseIcon from "@mui/icons-material/Close";
+import Chip from "@mui/material/Chip";
+import axiosClient from "../../api/axiosClient";
+import Autocomplete from "@mui/material/Autocomplete";
+import { TextField } from "@mui/material";
+import { setJobDialog } from "../../reducer/editJobDialog";
+import { htmlToText, textToHtml } from "../../util/HtmlTagUtil";
 import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
-import NotifyToast from "../../components/NotifyToast/NotifyToast";
-import {textToHtml} from "../../util/HtmlTagUtil";
-import { Autocomplete, TextField } from "@mui/material";
 
-function JobPost() {
+function EditJobDialog() {
+  const jobDialog = useSelector((state) => state.jobDialog);
   const [skills, setSkills] = useState([]);
-  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [error, setError] = useState({});
   useEffect(() => {
     axiosClient
       .get("/skill/popular-skills")
@@ -30,123 +36,59 @@ function JobPost() {
       })
       .catch(() => {});
   }, []);
-
-  const handleAddSkill = (event) => {
-    let innerHtml = event.target.innerHTML;
-    let id = event.target.id;
-    if (id !== null && id !== undefined) {
-      id = parseInt(id.substr(id.lastIndexOf("-") + 1)) + 1;
-    }
-    let arr = selectedSkills;
-    let check = arr.map((e) => e.skillId).includes(id);
-    if (!check) {
-      arr = arr.concat({
-        skillId: id,
-        skillName: innerHtml,
-      });
-      setSelectedSkills(arr);
-    }
-
-    setInput({
-      ...input,
-      skills: arr,
-    });
-  };
-
-  const removeSelectedSkill = (skill) => {
-    let arr = selectedSkills;
-    arr = arr.filter((e) => {
-      return e.skillId !== skill.skillId;
-    });
-    setSelectedSkills(arr);
-
-    setInput({
-      ...input,
-      skills: arr,
-    });
-  };
-
-  const [input, setInput] = useState({
-    title: null,
-    detail: null,
-    paymentKind: BusinessConst.PAYMENT_KIND_FIXED_PRICE,
-    price: null,
-    termClass: BusinessConst.TERM_CLASS_YEAR,
-    termFrom: null,
-    termTo: null,
-    hourPerWeek: null,
-  });
-
-  const changeHourlyRate = () => {
-    setInput({
-      ...input,
-      paymentKind: BusinessConst.PAYMENT_KIND_HOURLY,
-    });
-  };
-
-  const changeFixedPrice = () => {
-    setInput({
-      ...input,
-      paymentKind: BusinessConst.PAYMENT_KIND_FIXED_PRICE,
-    });
+  const dispatch = useDispatch();
+  const handleClose = () => {
+    dispatch(closeJobDialog());
+    setError({
+      title: null,
+      detail: null,
+      skills: null,
+      price: null,
+      termTo: null,
+      termFrom: null,
+      hourPerWeek: null
+    })
   };
 
   const changeInput = (event) => {
     let name = event.target.name;
     let value = event.target.value;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-  };
 
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate(-1);
+    dispatch(
+      setJobDialog({
+        job: {
+          ...jobDialog.job,
+          [name]: value,
+        },
+      })
+    );
   };
 
   const titleRef = useRef();
-  const detailRef = useRef();
-  const skillsRef = useRef();
-  const priceRef = useRef();
+  const hourPerWeekRef = useRef();
   const termToRef = useRef();
   const termFromRef = useRef();
-  const hourPerWeekRef = useRef();
+  const priceRef = useRef();
+  const skillsRef = useRef();
+  const detailRef = useRef();
 
-  const [error, setError] = useState({
-    title: null,
-    detail: null,
-    skills: null,
-    price: null,
-    termTo: null,
-    termFrom: null,
-    hourPerWeek: null,
-  });
-
-  const [notify, setNotify] = useState({
-    display: false,
-    kind: null,
-    message: null
-  });
-
-  const handlePostJob = () => {
+  const handleUpdateJob = () => {
     titleRef.current.classList.remove("borderError");
     detailRef.current.classList.remove("borderError");
     skillsRef.current.classList.remove("borderError");
     priceRef.current.classList.remove("borderError");
-    if (input.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY){
+    if (jobDialog.job.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY) {
       termToRef.current.classList.remove("borderError");
       termFromRef.current.classList.remove("borderError");
       hourPerWeekRef.current.classList.remove("borderError");
     }
-  
     var validate = true;
 
     let titleCheck = null;
     if (
-      input.title === null ||
-      input.title === undefined ||
-      input.title === ""
+      jobDialog.job.title === null ||
+      jobDialog.job.title === undefined ||
+      jobDialog.job.title === ""
     ) {
       validate = false;
       titleRef.current.classList.add("borderError");
@@ -155,9 +97,9 @@ function JobPost() {
 
     let detailCheck = null;
     if (
-      input.detail === null ||
-      input.detail === undefined ||
-      input.detail === ""
+      jobDialog.job.detail === null ||
+      jobDialog.job.detail === undefined ||
+      jobDialog.job.detail === ""
     ) {
       validate = false;
       detailRef.current.classList.add("borderError");
@@ -165,7 +107,7 @@ function JobPost() {
     }
 
     let skillsCheck = null;
-    if (selectedSkills.length === 0) {
+    if (jobDialog.job.skills.length === 0) {
       validate = false;
       skillsRef.current.classList.add("borderError");
       skillsCheck = "Ít nhất 1 kĩ năng";
@@ -173,13 +115,15 @@ function JobPost() {
 
     let priceCheck = null;
     if (
-      input.price === null ||
-      input.price === undefined ||
-      input.price === ""
+      jobDialog.job.price === null ||
+      jobDialog.job.price === undefined ||
+      jobDialog.job.price === ""
     ) {
       validate = false;
       priceRef.current.classList.add("borderError");
-      if (input.paymentKind === BusinessConst.PAYMENT_KIND_FIXED_PRICE) {
+      if (
+        jobDialog.job.paymentKind === BusinessConst.PAYMENT_KIND_FIXED_PRICE
+      ) {
         priceCheck = "Bắt buộc";
       } else {
         priceCheck = "Bắt buộc";
@@ -190,11 +134,11 @@ function JobPost() {
     let termToCheck = null;
     let hourPerWeekCheck = null;
 
-    if (input.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY) {
+    if (jobDialog.job.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY) {
       if (
-        input.termFrom === null ||
-        input.termFrom === undefined ||
-        input.termFrom === ""
+        jobDialog.job.termFrom === null ||
+        jobDialog.job.termFrom === undefined ||
+        jobDialog.job.termFrom === ""
       ) {
         validate = false;
         termFromRef.current.classList.add("borderError");
@@ -202,9 +146,9 @@ function JobPost() {
       }
 
       if (
-        input.termTo === null ||
-        input.termTo === undefined ||
-        input.termTo === ""
+        jobDialog.job.termTo === null ||
+        jobDialog.job.termTo === undefined ||
+        jobDialog.job.termTo === ""
       ) {
         validate = false;
         termToRef.current.classList.add("borderError");
@@ -212,9 +156,9 @@ function JobPost() {
       }
 
       if (
-        input.hourPerWeek === null ||
-        input.hourPerWeek === undefined ||
-        input.hourPerWeek === ""
+        jobDialog.job.hourPerWeek === null ||
+        jobDialog.job.hourPerWeek === undefined ||
+        jobDialog.job.hourPerWeek === ""
       ) {
         validate = false;
         hourPerWeekRef.current.classList.add("borderError");
@@ -230,43 +174,107 @@ function JobPost() {
       price: priceCheck,
       termTo: termToCheck,
       termFrom: termFromCheck,
-      hourPerWeek: hourPerWeekCheck,
+      hourPerWeek: hourPerWeekCheck
     });
 
-    if (validate) {
+    if (validate){
       axiosRequiredAuthor
-        .post("/job/post-job", null, {
+        .post("/job/update-job", null, {
           params: {
-            title:input.title,
-            detail:textToHtml(input.detail),
-            paymentKind:input.paymentKind,
-            price:input.price,
-            termClass:input.termClass,
-            termFrom:input.termFrom,
-            termTo:input.termTo,
-            hourPerWeek:input.hourPerWeek,
-            skills:JSON.stringify(selectedSkills)
+            jobId: jobDialog.job.jobId,
+            title:jobDialog.job.title,
+            detail:textToHtml(jobDialog.job.detail),
+            paymentKind:jobDialog.job.paymentKind,
+            price:jobDialog.job.price,
+            termClass:jobDialog.job.termClass,
+            termFrom:jobDialog.job.termFrom,
+            termTo:jobDialog.job.termTo,
+            hourPerWeek:jobDialog.job.hourPerWeek,
+            skills:JSON.stringify(jobDialog.job.skills) 
           }
         })
         .then((response) => {
-          navigate(`/applicants/${response.jobId}/job-detail`);
+          handleClose();
+          window.location.reload();
         })
         .catch(() => {
-          setNotify({
-            display:true,
-            kind: "error",
-            message: "Post a job failed"
-          });
-          window.scrollTo(0,0);
+          alert("Đã xảy ra lỗi không thể cập nhật");
         });
     }
   };
 
+  const addSkill = (event) => {
+    let innerHtml = event.target.innerHTML;
+    let id = event.target.id;
+    if (id !== null && id !== undefined) {
+      id = parseInt(id.substr(id.lastIndexOf("-") + 1)) + 1;
+    }
+    let arr = jobDialog.job.skills;
+    let check = arr.map((e) => e.skillId).includes(id);
+    if (!check) {
+      arr = arr.concat({
+        skillId: id,
+        skillName: innerHtml,
+      });
+    }
+    dispatch(
+      setJobDialog({
+        job: {
+          ...jobDialog.job,
+          skills: arr,
+        },
+      })
+    );
+  };
+
+  const removeSelectedSkill = (skill) => {
+    let arr = jobDialog.job.skills;
+    arr = arr.filter((e) => {
+      return e.skillId !== skill.skillId;
+    });
+    dispatch(
+      setJobDialog({
+        job: {
+          ...jobDialog.job,
+          skills: arr,
+        },
+      })
+    );
+  };
+
+  const changeFixedPrice = () => {
+    dispatch(
+      setJobDialog({
+        job: {
+          ...jobDialog.job,
+          paymentKind: BusinessConst.PAYMENT_KIND_FIXED_PRICE,
+        },
+      })
+    );
+  };
+
+  const changeHourlyRate = () => {
+    dispatch(
+      setJobDialog({
+        job: {
+          ...jobDialog.job,
+          paymentKind: BusinessConst.PAYMENT_KIND_HOURLY,
+        },
+      })
+    );
+  };
+
   return (
-    <div id="jobPostPage">
-      {
-        notify.display ? <NotifyToast kind={notify.kind} message={notify.message} setNotify={setNotify} /> : <React.Fragment/>
-      }
+    <Dialog
+      classes={{
+        paper: "editJobDialog",
+      }}
+      fullWidth={true}
+      open={jobDialog.isOpen}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
       <div className="formItem mt-3">
         <label className="formItemLabel" htmlFor="title">
           Tiêu đề
@@ -278,6 +286,7 @@ function JobPost() {
           name="title"
           type="text"
           onChange={changeInput}
+          value={jobDialog.job.title}
         />
         <span className="errorInput">{error.title}</span>
       </div>
@@ -292,6 +301,11 @@ function JobPost() {
           name="detail"
           type="text"
           onChange={changeInput}
+          value={
+            jobDialog.job.detail !== undefined
+              ? htmlToText(jobDialog.job.detail)
+              : ""
+          }
         />
         <span className="errorInput">{error.detail}</span>
       </div>
@@ -307,14 +321,14 @@ function JobPost() {
           options={skills}
           renderInput={(params) => <TextField {...params} />}
           clearOnBlur={false}
-          onChange={handleAddSkill}
+          onChange={addSkill}
         />
         <span className="errorInput">{error.skills}</span>
-        {selectedSkills.length > 0 ? (
+        {jobDialog.job.skills.length > 0 ? (
           <div>
             <div className="formItemLabel subLabel mt-2">Kĩ năng đã chọn</div>
             <div className="skills selectedSkills">
-              {selectedSkills.map((skill, index) => {
+              {jobDialog.job.skills.map((skill, index) => {
                 return (
                   <Chip
                     key={index}
@@ -340,7 +354,8 @@ function JobPost() {
           <div
             className={
               "paymentKind d-flex flex-row " +
-              (input.paymentKind === BusinessConst.PAYMENT_KIND_FIXED_PRICE
+              (jobDialog.job.paymentKind ===
+              BusinessConst.PAYMENT_KIND_FIXED_PRICE
                 ? "active"
                 : "")
             }
@@ -358,16 +373,16 @@ function JobPost() {
               type="radio"
               name="paymentKind"
               value="1"
-              onChange={() => {}}
               checked={
-                input.paymentKind === BusinessConst.PAYMENT_KIND_FIXED_PRICE
+                jobDialog.job.paymentKind ===
+                BusinessConst.PAYMENT_KIND_FIXED_PRICE
               }
             />
           </div>
           <div
             className={
               "paymentKind d-flex flex-row " +
-              (input.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY
+              (jobDialog.job.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY
                 ? "active"
                 : "")
             }
@@ -385,14 +400,16 @@ function JobPost() {
               type="radio"
               name="paymentKind"
               value="2"
-              onChange={() => {}}
-              checked={input.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY}
+              checked={
+                jobDialog.job.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY
+              }
             />
           </div>
         </div>
         <div className="price mt-3">
           <label htmlFor="price">
-            {input.paymentKind === BusinessConst.PAYMENT_KIND_FIXED_PRICE
+            {jobDialog.job.paymentKind ===
+            BusinessConst.PAYMENT_KIND_FIXED_PRICE
               ? "Giá cố định"
               : "Giá theo giờ"}
           </label>
@@ -404,12 +421,13 @@ function JobPost() {
             name="price"
             className="formItemInput"
             onChange={changeInput}
+            value={jobDialog.job.price}
           />
           <span className="currency">VND</span>
         </div>
         <span className="errorInput">{error.price}</span>
       </div>
-      {input.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY ? (
+      {jobDialog.job.paymentKind === BusinessConst.PAYMENT_KIND_HOURLY ? (
         <div className="formItem">
           <label className="formItemLabel mb-3" htmlFor="">
             Thời gian có thể kéo dài trong khoảng ?
@@ -443,6 +461,7 @@ function JobPost() {
                 type="number"
                 min={0}
                 onChange={changeInput}
+                value={jobDialog.job.termFrom}
               />
               <span className="errorInput">{error.termFrom}</span>
             </div>
@@ -458,6 +477,7 @@ function JobPost() {
                 type="number"
                 min={0}
                 onChange={changeInput}
+                value={jobDialog.job.termTo}
               />
               <span className="errorInput">{error.termTo}</span>
             </div>
@@ -473,6 +493,7 @@ function JobPost() {
                 name="hourPerWeek"
                 className="formItemInput hourPerWeek"
                 onChange={changeInput}
+                value={jobDialog.job.hourPerWeek}
               />
               <span className="errorInput">{error.hourPerWeek}</span>
             </div>
@@ -482,15 +503,15 @@ function JobPost() {
         <React.Fragment />
       )}
       <div>
-        <button className="btn backBtn m-2" onClick={handleBack}>
-          Quay về
+        <button className="btn backBtn m-2" onClick={handleClose}>
+          Huỷ
         </button>
-        <button className="btn postJob m-2" onClick={handlePostJob}>
-          Đăng công việc
+        <button className="btn postJob m-2" onClick={handleUpdateJob}>
+          Cập nhật
         </button>
       </div>
-    </div>
+    </Dialog>
   );
 }
 
-export default JobPost;
+export default EditJobDialog;

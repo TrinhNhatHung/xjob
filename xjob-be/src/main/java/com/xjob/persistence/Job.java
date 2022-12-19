@@ -85,10 +85,16 @@ public class Job {
 	private User authorId;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
+	@JsonIgnore
 	private List<JobSkill> jobSkills;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
+	@JsonIgnore
 	private List<Proposal> proposals;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
+	@JsonIgnore
+	private List<JobStatus> jobStatus;
 
 	@Override
 	public boolean equals(Object o) {

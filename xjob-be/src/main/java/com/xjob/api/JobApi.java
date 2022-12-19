@@ -10,12 +10,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xjob.constant.BusinessConst;
 import com.xjob.persistence.Job;
+import com.xjob.persistence.Skill;
 import com.xjob.persistence.User;
 import com.xjob.response.JobResponse;
 import com.xjob.response.UserResponse;
@@ -147,7 +152,7 @@ public class JobApi {
 	@PostMapping("/post-job")
 	public ResponseEntity<?> postJob(@RequestParam(name = "title") String title,
 			@RequestParam(name = "detail") String detail,
-			@RequestParam(name = "skills") List<String> skills,
+			@RequestParam(name = "skills") String skillsJson,
 			@RequestParam(name = "paymentKind") String paymentKind,
 			@RequestParam(name = "price") Integer price,
 			@RequestParam(name = "termClass", required = false) String termClass,
@@ -156,6 +161,8 @@ public class JobApi {
 			@RequestParam(name = "hourPerWeek", required = false) Integer hourPerWeek){
 		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try {
+			ObjectMapper mapper = new ObjectMapper();
+			List<Skill> skills = mapper.readValue(skillsJson, new TypeReference<List<Skill>>() {});
 			Job job = new Job();
 			job.setTitle(title);
 			job.setDetail(detail);
@@ -174,6 +181,58 @@ public class JobApi {
 			Map<String, Object> result = new HashMap<>();
 			result.put("jobId", insertedJobId);
 			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/update-job")
+	public ResponseEntity<?> updateJob(@RequestParam(name = "jobId") Integer jobId,
+			@RequestParam(name = "title") String title,
+			@RequestParam(name = "detail") String detail,
+			@RequestParam(name = "skills") String skillsJson,
+			@RequestParam(name = "paymentKind") String paymentKind,
+			@RequestParam(name = "price") Integer price,
+			@RequestParam(name = "termClass", required = false) String termClass,
+			@RequestParam(name = "termFrom", required = false) Integer termFrom,
+			@RequestParam(name = "termTo", required = false) Integer termTo,
+			@RequestParam(name = "hourPerWeek", required = false) Integer hourPerWeek){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			List<Skill> skills = mapper.readValue(skillsJson, new TypeReference<List<Skill>>() {});
+			Job job = new Job();
+			job.setJobId(jobId);
+			job.setTitle(title);
+			job.setDetail(detail);
+			job.setPaymentKind(paymentKind);
+			job.setPrice(price);
+			if (paymentKind.equals(BusinessConst.PAYMENT_KIND_HOURLY)) {
+				job.setTermFrom(termFrom);
+				job.setTermTo(termTo);
+				job.setHourPerWeek(hourPerWeek);
+				job.setTermClass(termClass);
+			}
+			User user = new User();
+			user.setUid(uid);
+			job.setAuthorId(user);
+			jobService.updateJob(job, skills);
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/delete/{jobId}")
+	public ResponseEntity<?> deleteJob(@PathVariable(name="jobId") String jobId){
+		
+		try {
+			Integer parsedJobId = Integer.parseInt(jobId);
+			jobService.closeJob(parsedJobId);
+			return new ResponseEntity<Object>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);

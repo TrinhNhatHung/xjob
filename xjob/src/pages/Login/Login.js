@@ -4,8 +4,6 @@ import ErrorIcon from "@mui/icons-material/Error";
 import PersonIcon from "@mui/icons-material/Person";
 import PasswordIcon from "@mui/icons-material/Password";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../app/firebase_config";
 import axiosClient from "../../api/axiosClient";
 import { useDispatch } from "react-redux";
 import {login} from '../../reducer/userSlice';
@@ -23,17 +21,18 @@ function Login() {
     password: "",
   });
   const dispatch = useDispatch();
-  const requestCheckLogin = async (uid) => {
-    let config = {
-      method: "GET",
-      url: `/user/check-login?uid=${uid}`,
-    };
-    axiosClient(config)
+  const requestCheckLogin = () => {
+    axiosClient.post(`/user/check-login`,null, {
+      params: {
+        email: user.email, 
+        password: user.password
+      }
+    })
       .then((response) => {
         localStorage.setItem("token",response.data.token);
         dispatch(login({
           isAuthen: true,
-          uid,
+          uid: response.data.uid,
           lastName: response.data.lastName,
           firstName: response.data.firstName,
           avatarUrl: response.data.avatarUrl,
@@ -89,20 +88,7 @@ function Login() {
       user.password !== "" &&
       user.password !== undefined
     ) {
-      signInWithEmailAndPassword(auth, user.email, user.password)
-        .then((userCredential) => {
-          let uid = userCredential.user.uid;
-          requestCheckLogin(uid);
-        })
-        .catch((error) => {
-          inputEmailDiv.current.classList.add("borderError");
-          inputPasswordDiv.current.classList.add("borderError");
-          setError({
-            ...error,
-            email: null,
-            password: "Email hoặc mật khẩu không đúng",
-          });
-        });
+        requestCheckLogin();       
     }
   };
 

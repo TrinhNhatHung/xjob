@@ -11,6 +11,7 @@ import com.xjob.constant.BusinessConst;
 import com.xjob.persistence.Job;
 import com.xjob.persistence.JobSkill;
 import com.xjob.persistence.Proposal;
+import com.xjob.persistence.Skill;
 
 @Component
 public class JobResponse {
@@ -25,8 +26,35 @@ public class JobResponse {
 	}
 	
 	public Map<String, Object> responseJob(Job job){
-		Map<String,Object> map = convertJobToMap(job);
-		return map;
+		Map<String,Object> jobMap = new HashMap<>();
+		jobMap.put("jobId", job.getJobId());
+		jobMap.put("title", job.getTitle());
+		jobMap.put("detail", job.getDetail());
+		jobMap.put("hireAmount", job.getHireAmount());
+		jobMap.put("hiredAmount", job.getHiredAmount());
+		jobMap.put("hourPerWeek", job.getHourPerWeek());
+		jobMap.put("paymentKind", job.getPaymentKind());
+		jobMap.put("termClass", job.getTermClass());
+		jobMap.put("termFrom", job.getTermFrom());
+		jobMap.put("termTo", job.getTermTo());
+		jobMap.put("price", job.getPrice());
+		jobMap.put("createAt", job.getCreateAt());
+		jobMap.put("updateAt", job.getUpdateAt());
+		List<Skill> skills = new ArrayList<>();
+		for(JobSkill jobSkill : job.getJobSkills()) {
+			skills.add(jobSkill.getSkill());
+		}
+		jobMap.put("skills", skills);
+		List<Proposal> proposals = job.getProposals();
+		long proposalCount = proposals.stream()
+				.filter(proposal -> BusinessConst.PROPOSAL_PROPOSAL.equals(proposal.getProposalId().getKind()))
+				.count();
+		jobMap.put("proposals", proposalCount);
+		long hiredCount = proposals.stream()
+				.filter(proposal -> BusinessConst.PROPOSAL_HIRED.equals(proposal.getProposalId().getKind()))
+				.count();
+		jobMap.put("hired", hiredCount);
+		return jobMap;
 	}
 	
 	private Map<String,Object> convertJobToMap (Job job){
