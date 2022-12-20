@@ -7,7 +7,8 @@ const BusinessConst = {
     TERM_CLASS_WEEK : "3",
     TERM_CLASS_DAY : "4",
     ROLE_CLIENT: "ROLE_CLIENT",
-    ROLE_FREELANCER: "ROLE_FREELANCER"
+    ROLE_FREELANCER: "ROLE_FREELANCER",
+    ROLE_ADMIN: "ROLE_ADMIN"
 }
 
 export {BusinessConst};

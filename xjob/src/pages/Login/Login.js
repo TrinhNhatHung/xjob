@@ -42,8 +42,10 @@ function Login() {
         }));
         if (response.data.role === BusinessConst.ROLE_CLIENT){
           navigate("/client/dashboard");
-        } else {
+        } else if (response.data.role === BusinessConst.ROLE_FREELANCER){
           navigate("/find-work");
+        } else {
+          navigate("/admin/dashboard");
         }
       })
       .catch((error) => {

@@ -8,63 +8,66 @@ import { Badge } from "@mui/material";
 import Avatar from "@material-ui/core/Avatar";
 import SockJS from "sockjs-client";
 import { Stomp } from "@stomp/stompjs";
-import {BusinessConst} from "../../constant/BusinessConst";
+import { BusinessConst } from "../../constant/BusinessConst";
 import Notification from "../Notification/Notification";
 import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
-import {logout} from "../../reducer/userSlice";
+import { logout } from "../../reducer/userSlice";
 
 function Header() {
   const user = useSelector((state) => state.user);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [notification, setNotification] = useState({
     page: 1,
     limit: 5,
-    list: []
+    list: [],
   });
 
   const [hasNotification, setHasNotification] = useState({
     status: false,
-    content: null
+    content: null,
   });
 
-  if (user.isAuthen){
+  if (user.isAuthen) {
     var socket = new SockJS(BusinessConst.DOMAIN + "/notification");
     var stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-      stompClient.subscribe("/topic/notifications/" + user.uid, function (message) {
-        fetchNotifications();
-        setHasNotification({
-          status: true
-        })
-      });
+      stompClient.subscribe(
+        "/topic/notifications/" + user.uid,
+        function (message) {
+          fetchNotifications();
+          setHasNotification({
+            status: true,
+          });
+        }
+      );
     });
   }
-  
 
-  const fetchNotifications = ()=> {
-    axiosRequiredAuthor.get(`/notification-list?page=${notification.page}&limit=${notification.limit}`)
-      .then((response)=> {
+  const fetchNotifications = () => {
+    axiosRequiredAuthor
+      .get(
+        `/notification-list?page=${notification.page}&limit=${notification.limit}`
+      )
+      .then((response) => {
         setNotification({
           ...notification,
-          list: response.notifications
-        })
+          list: response.notifications,
+        });
       })
-      .catch(()=> {
-      });
-  }
+      .catch(() => {});
+  };
 
-  useEffect(()=> {
-    if (user.isAuthen){
+  useEffect(() => {
+    if (user.isAuthen) {
       fetchNotifications();
     }
-  },[user.isAuthen]);
-  
-  const navigate = useNavigate();
+  }, [user.isAuthen]);
+
   const handleNavigateLogin = (event) => {
     event.preventDefault();
     navigate("/login");
   };
-
-  const location = useLocation();
 
   const redirectToSignupPage = () => {
     navigate("/signup");
@@ -77,7 +80,7 @@ function Header() {
 
   const redirectToSettings = (event) => {
     event.preventDefault();
-    if (user.role === BusinessConst.ROLE_FREELANCER){
+    if (user.role === BusinessConst.ROLE_FREELANCER) {
       navigate("/freelancer-info");
     } else {
       navigate("/client-info");
@@ -100,34 +103,59 @@ function Header() {
     }
   };
 
-  const seeAllNotification = ()=> {
+  const seeAllNotification = () => {
     setHasNotification({
       ...hasNotification,
       status: false,
-      content: null
-    })
-  }
+      content: null,
+    });
+  };
+
+  const redirectToClient = (event) => {
+    event.preventDefault();
+    navigate("/client/dashboard");
+  };
+
+  const redirectToFreelancer = (event) => {
+    event.preventDefault();
+    navigate("/find-work");
+  };
 
   const renderHeaderRight = () => {
     if (user.isAuthen) {
       return (
         <ul className="headerRight nav">
           <div className="dropdown">
-            {
-              hasNotification.status ? <Badge onClick={seeAllNotification} className="btnIcon dropdown-toggle" data-bs-toggle="dropdown" badgeContent="" color="error">
-                <NotificationsNoneIcon className="headerIcon" fontSize="small" />
+            {hasNotification.status ? (
+              <Badge
+                onClick={seeAllNotification}
+                className="btnIcon dropdown-toggle"
+                data-bs-toggle="dropdown"
+                badgeContent=""
+                color="error"
+              >
+                <NotificationsNoneIcon
+                  className="headerIcon"
+                  fontSize="small"
+                />
               </Badge>
-              :
-              <Badge onClick={seeAllNotification} className="btnIcon dropdown-toggle" data-bs-toggle="dropdown" color="error">
-                <NotificationsNoneIcon className="headerIcon" fontSize="small" />
+            ) : (
+              <Badge
+                onClick={seeAllNotification}
+                className="btnIcon dropdown-toggle"
+                data-bs-toggle="dropdown"
+                color="error"
+              >
+                <NotificationsNoneIcon
+                  className="headerIcon"
+                  fontSize="small"
+                />
               </Badge>
-            }
+            )}
             <ul className="dropdown-menu notification">
-              {
-                notification.list.map((item,index)=> {
-                  return <Notification key={index} notification={item}/>
-                })
-              }
+              {notification.list.map((item, index) => {
+                return <Notification key={index} notification={item} />;
+              })}
               <div className="seeAllNotification">Xem tất cả thông báo</div>
             </ul>
           </div>
@@ -199,12 +227,12 @@ function Header() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/find-talent">
+              <a className="nav-link" href="/client/dashboard" onClick={redirectToClient}>
                 Tìm ứng viên
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/find-work">
+              <a className="nav-link" href="/find-work" onClick={redirectToFreelancer}>
                 Tìm việc
               </a>
             </li>
