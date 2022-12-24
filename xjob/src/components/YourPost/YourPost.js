@@ -32,6 +32,23 @@ function YourPost(props) {
           </div>
         </div>
       </div>
+      <div className="statusArea">
+        {
+          props.post.status === "OPEN"? 
+          <span className="status open">{props.post.status}</span> :
+          <React.Fragment/>
+        }
+        {
+          props.post.status === "COMPLETE"? 
+          <span className="status complete">{props.post.status}</span> :
+          <React.Fragment/>
+        }
+        {
+          props.post.status === "CLOSE"? 
+          <span className="status close">{props.post.status}</span> :
+          <React.Fragment/>
+        }
+      </div>
     </div>
   );
 }

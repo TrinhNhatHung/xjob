@@ -32,6 +32,25 @@
     margin-bottom: 10px;
 }
 
+#yourPost .statusArea .status {
+    color: #fff;
+    font-size: 0.75em;
+    padding: 2px 10px;
+    border-radius: 20px;
+}
+
+#yourPost .statusArea .status.open {
+    background-color: #0D6EFD;
+}
+
+#yourPost .statusArea .status.complete {
+    background-color: #157347;
+}
+
+#yourPost .statusArea .status.close {
+    background-color: #BB2D3B;
+}
+
 #yourPost .proposals {
     margin-right: 50px;
 }

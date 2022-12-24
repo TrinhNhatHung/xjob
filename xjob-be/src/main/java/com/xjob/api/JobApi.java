@@ -239,6 +239,19 @@ public class JobApi {
 		}
 	}
 	
+	@PostMapping("/complete/{jobId}")
+	public ResponseEntity<?> completeJob(@PathVariable(name="jobId") String jobId){
+		
+		try {
+			Integer parsedJobId = Integer.parseInt(jobId);
+			jobService.completeJob(parsedJobId);
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@GetMapping("/hirings")
 	public ResponseEntity<?> getHiringByJob(@RequestParam(name = "jobId") Integer jobId){
 		try {
@@ -248,6 +261,21 @@ public class JobApi {
 			result.put("users", data);
 			return new ResponseEntity<Object>(result, HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/my-job")
+	public ResponseEntity<?> getMyJob(){
+		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			List<Job> jobs = jobService.getFreelancerJob(uid);
+			List<Map<String, Object>> data = jobResponse.responseJobList(jobs);
+			Map<String, Object> result = new HashMap<>();
+			result.put("jobs", data);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		} catch (Exception e) {      
 			e.printStackTrace();
 			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

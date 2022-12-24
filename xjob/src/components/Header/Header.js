@@ -121,6 +121,11 @@ function Header() {
     navigate("/find-work");
   };
 
+  const redirectToMyJob = (event) => {
+    event.preventDefault();
+    navigate("/my-job");
+  };
+
   const renderHeaderRight = () => {
     if (user.isAuthen) {
       return (
@@ -172,10 +177,23 @@ function Header() {
                 {user.firstName + " " + user.lastName}
               </span>
               <span className="role">{getRoleFromResponseStr()}</span>
+              {user.role === BusinessConst.ROLE_FREELANCER ? (
+                <li className="dropdown-item-li">
+                  <a
+                    className="dropdown-item"
+                    href="/my-job"
+                    onClick={redirectToMyJob}
+                  >
+                    Công việc của tôi
+                  </a>
+                </li>
+              ) : (
+                <React.Fragment />
+              )}
               <li className="dropdown-item-li">
                 <a
                   className="dropdown-item"
-                  href="/info"
+                  href="/freelancer-info"
                   onClick={redirectToSettings}
                 >
                   Cài đặt
@@ -226,16 +244,32 @@ function Header() {
                 XJob
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/client/dashboard" onClick={redirectToClient}>
-                Tìm ứng viên
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/find-work" onClick={redirectToFreelancer}>
-                Tìm việc
-              </a>
-            </li>
+            {user.role === BusinessConst.ROLE_CLIENT ? (
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  href="/client/dashboard"
+                  onClick={redirectToClient}
+                >
+                  Tìm ứng viên
+                </a>
+              </li>
+            ) : (
+              <React.Fragment />
+            )}
+            {user.role === BusinessConst.ROLE_FREELANCER ? (
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  href="/find-work"
+                  onClick={redirectToFreelancer}
+                >
+                  Tìm việc
+                </a>
+              </li>
+            ) : (
+              <React.Fragment />
+            )}
           </ul>
           {renderHeaderRight()}
         </div>

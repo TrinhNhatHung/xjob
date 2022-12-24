@@ -1,0 +1,54 @@
+#myJob {
+    border-bottom: 1px solid #d5e0d5;
+    text-align: left;
+    font-family: sans-serif;
+    padding: 28px 25px;
+}
+
+#myJob:hover {
+    background-color: #F2F7F2;
+}
+
+#myJob .myJobTitle {
+    font-size: 1em;
+    color: #272c25;
+    margin-bottom: 20px;
+}
+
+#myJob .jobStatus {
+    font-size: 0.7em;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 20px;
+    margin-top: 5px;
+}
+
+#myJob .jobStatus.open {
+    background-color: #0D6EFD;
+}
+
+#myJob .jobStatus.close {
+    background-color: #BB2D3B;
+}
+
+#myJob .jobStatus.complete {
+    background-color: #157347;
+}
+
+#myJob .info {
+    font-size: 0.8em;
+    color: #767c73;
+    margin-bottom: 10px;
+}
+
+#myJob .jd {
+    font-size: 0.9em;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+#myJob .skills .skill {
+    margin-bottom: 10px;
+    margin-right: 5px;
+    background-color: #D5E0D5;
+}

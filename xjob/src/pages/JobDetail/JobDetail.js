@@ -8,6 +8,7 @@ import SellIcon from "@mui/icons-material/Sell";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import CheckIcon from '@mui/icons-material/Check';
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import axiosRequireAuthor from "../../api/axiosRequiredAuthor";
@@ -110,6 +111,20 @@ function JobDetail() {
     }
   }
 
+  const completeJob = (event)=> {
+    event.preventDefault();
+    let check = window.confirm("Bạn có chắc muốn thay đổi trạng thái công việc sang hoàn thành không?");
+    if (check){
+      axiosRequiredAuthor.post(`/job/complete/${jobId}`)
+      .then(()=> {
+        navigate("/client/dashboard");
+      })
+      .catch(()=> {
+        alert("Bị lỗi không thể cập nhật trạng thái công việc này được.");
+      })
+    }
+  }
+
   return (
     <div id="jobDetailPage">
       <ApplicantHeader jobId={jobId} />
@@ -140,6 +155,10 @@ function JobDetail() {
           <div className="jobAction">
             <EditIcon className="actionIcon" />
             <a className="actionText" href="#" onClick={openEditJobDialog}>Cập nhật bài đăng</a>
+          </div>
+          <div className="jobAction">
+            <CheckIcon className="actionIcon"/>
+            <a className="actionText" href="#" onClick={completeJob}>Hoàn thành công việc</a>
           </div>
           <div className="jobAction">
             <CloseIcon className="actionIcon"/>

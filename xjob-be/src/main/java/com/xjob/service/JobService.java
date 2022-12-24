@@ -17,7 +17,6 @@ import com.xjob.dao.JobDao;
 import com.xjob.dao.JobSkillDao;
 import com.xjob.dao.JobStatusDao;
 import com.xjob.dao.ProposalDao;
-import com.xjob.dao.SkillDao;
 import com.xjob.persistence.Job;
 import com.xjob.persistence.JobSkill;
 import com.xjob.persistence.JobSkill.Id;
@@ -31,9 +30,6 @@ public class JobService {
 
 	@Autowired
 	private JobDao jobDao;
-
-	@Autowired
-	private SkillDao skillDao;
 
 	@Autowired
 	private JobSkillDao jobSkillDao;
@@ -194,8 +190,19 @@ public class JobService {
 		return result;
 	}
 	
+	public List<Job> getFreelancerJob(String uid){
+		List<Integer> jobIds = proposalDao.getDistinctJobIdByUid(uid);
+		List<Job> jobs =  jobDao.getByListId(jobIds);
+		return jobs;
+	}
+	
 	@Transactional
 	public void closeJob(Integer jobId) {
 		jobStatusDao.closeJob(jobId);
+	}
+	
+	@Transactional
+	public void completeJob(Integer jobId) {
+		jobStatusDao.completeJob(jobId);
 	}
 }

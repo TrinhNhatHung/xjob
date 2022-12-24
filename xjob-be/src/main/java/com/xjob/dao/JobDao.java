@@ -36,6 +36,13 @@ public class JobDao extends EntityDao<Job>{
 		return query.getResultList();
 	}
 	
+	public List<Job> getByListId(List<Integer> jobIds){
+		final String SQL = "SELECT * FROM job WHERE job_id IN (:jobIds) ORDER BY update_at desc";
+		NativeQuery<Job> query = openSession().createNativeQuery(SQL, Job.class)
+						.setParameter("jobIds", jobIds);
+		return query.getResultList();
+	}
+	
 	public Job getByIdAndUid(Integer jobId, String uid) {
 		final String SQL = "SELECT * FROM job WHERE job_id = :jobId AND author_id = :uid";
 		NativeQuery<Job> query = openSession().createNativeQuery(SQL,Job.class)

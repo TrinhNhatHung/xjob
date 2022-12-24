@@ -33,6 +33,7 @@ import DashBoard from "./pages/Admin/DashBoard";
 import ManageAccount from "./pages/Admin/ManageAccount";
 import EditJobDialog from "./components/EditJobDialog.js/EditJobDialog";
 import { BusinessConst } from "./constant/BusinessConst";
+import MyJob from "./pages/MyJob/MyJob";
 
 function App() {
   const dispatch = useDispatch();
@@ -76,7 +77,8 @@ function App() {
             if (
               location.pathname !== "/find-work" &&
               location.pathname !== "/freelancer-info" &&
-              location.pathname !== "/jobs/search"
+              location.pathname !== "/jobs/search"&&
+              location.pathname !== "/my-job"
             ) {
               window.location.href = "/no-authen";
             }
@@ -121,6 +123,7 @@ function App() {
             <Route path={`/job-post`} element={<JobPost />} />
             <Route path={`/client-info`} element={<ClientInfo />} />
             <Route path={`/freelancer-info`} element={<FreelancerInfo />} />
+            <Route path={`/my-job`} element={<MyJob />} />
             <Route
               path={`/applicant-profile/:uid`}
               element={<ApplicantProfile />}

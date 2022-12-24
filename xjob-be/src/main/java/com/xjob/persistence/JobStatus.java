@@ -39,12 +39,12 @@ public class JobStatus {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime updateAt;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("jobId")
 	@JoinColumn(name = "job_id",referencedColumnName = "job_id")
 	private Job job;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("statusId")
 	@JoinColumn(name = "status_id",referencedColumnName = "status_id")
 	private Status status;
