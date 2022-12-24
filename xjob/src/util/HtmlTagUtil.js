@@ -7,10 +7,16 @@ const textToHtml = (text)=> {
 }
 
 const htmlToInlineText = (html)=> {
+    if (html === null || html === undefined){
+        return html;
+    }
     return html.replaceAll("<br/>"," ");
 }
 
 const htmlToText = (html)=> {
+    if (html === null || html === undefined){
+        return html;
+    }
     return html.replaceAll("<br/>","\n");
 }
 export {textToHtml,htmlToInlineText,htmlToText}

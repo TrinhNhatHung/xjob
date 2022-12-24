@@ -34,6 +34,7 @@ import ManageAccount from "./pages/Admin/ManageAccount";
 import EditJobDialog from "./components/EditJobDialog.js/EditJobDialog";
 import { BusinessConst } from "./constant/BusinessConst";
 import MyJob from "./pages/MyJob/MyJob";
+import EditHourRateDialog from "./components/EditHourRateDialog/EditHourRateDialog";
 
 function App() {
   const dispatch = useDispatch();
@@ -142,6 +143,7 @@ function App() {
       <ProposalDialog />
       <HiringDialog />
       <EditJobDialog />
+      <EditHourRateDialog/>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import { openExperienceDialog } from "../../reducer/experienceDialog";
 import { openProfileDialog } from "../../reducer/editProfileDialog";
 import axiosRequiredAuthor from "../../api/axiosRequiredAuthor";
 import {htmlToText} from "../../util/HtmlTagUtil";
+import { openHourRateDialog } from "../../reducer/editHourRateDialog";
 
 function FreelancerInfo() {
   const [info, setInfo] = useState({
@@ -133,6 +134,12 @@ function FreelancerInfo() {
     );
   };
 
+  const openEditHourRate = ()=> {
+    dispatch(openHourRateDialog({
+      hourlyRate: info.hourlyRate
+    }))
+  }
+
   return (
     <div id="freelancerInfoPage">
       <div className="freelancerBackground">
@@ -157,7 +164,7 @@ function FreelancerInfo() {
             <div className="element">
               <div className="title d-flex">
                 <span className="text">Chi phí một giờ</span>
-                <span className="icon">
+                <span className="icon" onClick={openEditHourRate}>
                   <EditIcon className="iconSvg" />
                 </span>
               </div>

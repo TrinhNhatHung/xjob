@@ -1,0 +1,66 @@
+.editHourlyRateForm {
+    width: 45%;
+    padding: 20px 20px;
+}
+
+.editHourlyRateForm .formTitle {
+    font-size: 1.45em;
+    font-family: sans-serif;
+    margin-bottom: 15px;
+}
+
+.editHourlyRateForm .form-item .form-item-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.editHourlyRateForm .form-item .form-item-input {
+    border: 2px solid #d5e0d5;
+    border-radius: 5px;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    padding: 4px 10px;
+    font-size: 0.95em;
+}
+
+.editHourlyRateForm .form-item textarea.form-item-input {
+    height: 120px;
+}
+
+.editHourlyRateForm .form-item .error {
+    color: #9b211b;
+    font-size: 0.95em;
+}
+
+.editHourlyRateForm .form-item .form-item-input.borderError {
+    border: 1.5px solid #9b211b;
+}
+
+.editHourlyRateForm .btnGroup {
+    margin-top: 70px;
+}
+
+.editHourlyRateForm .btnSubmit {
+    background-color: #14a800;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.editHourlyRateForm .btnSubmit:hover {
+    color: #fff;
+    background-color: #0f8300;
+}
+
+.editHourlyRateForm .btn {
+    padding: 4px 15px;
+}
+
+.editHourlyRateForm .btnCancel {
+    color: #14a800;
+}
+
+.editHourlyRateForm .btnCancel:hover {
+    color: #0f8300;
+}
