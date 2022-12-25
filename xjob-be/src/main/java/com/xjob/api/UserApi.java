@@ -101,7 +101,7 @@ public class UserApi {
 				data.put("role", user.getRole().getRoleName());
 				data.put("email", user.getEmail());
 				data.put("lastName", user.getLastName());
-				data.put("firstName", user.getLastName());
+				data.put("firstName", user.getFirstName());
 				data.put("uid", user.getUid());
 				Map<String, Object> result = new HashMap<String, Object>();
 				result = ResponseUtil.createResponse(true, data, null);

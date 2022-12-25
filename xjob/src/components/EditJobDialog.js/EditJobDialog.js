@@ -203,12 +203,9 @@ function EditJobDialog() {
     }
   };
 
-  const addSkill = (event) => {
-    let innerHtml = event.target.innerHTML;
-    let id = event.target.id;
-    if (id !== null && id !== undefined) {
-      id = parseInt(id.substr(id.lastIndexOf("-") + 1)) + 1;
-    }
+  const addSkill = (event,value) => {
+    let innerHtml = value.skillName;
+    let id = value.skillId;
     let arr = jobDialog.job.skills;
     let check = arr.map((e) => e.skillId).includes(id);
     if (!check) {

@@ -39,6 +39,7 @@ function Header() {
           setHasNotification({
             status: true,
           });
+          alert("Bạn có một thông báo mới");
         }
       );
     });

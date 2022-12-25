@@ -31,12 +31,9 @@ function JobPost() {
       .catch(() => {});
   }, []);
 
-  const handleAddSkill = (event) => {
-    let innerHtml = event.target.innerHTML;
-    let id = event.target.id;
-    if (id !== null && id !== undefined) {
-      id = parseInt(id.substr(id.lastIndexOf("-") + 1)) + 1;
-    }
+  const handleAddSkill = (event, value) => {
+    let innerHtml = value.skillName;
+    let id = value.skillId;
     let arr = selectedSkills;
     let check = arr.map((e) => e.skillId).includes(id);
     if (!check) {
@@ -306,7 +303,7 @@ function JobPost() {
           id="combo-box-demo"
           options={skills}
           renderInput={(params) => <TextField {...params} />}
-          clearOnBlur={false}
+          clearOnBlur={true}
           onChange={handleAddSkill}
         />
         <span className="errorInput">{error.skills}</span>

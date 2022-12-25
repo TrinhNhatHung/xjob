@@ -1,7 +1,6 @@
 package com.xjob.dao;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Repository;
@@ -23,7 +22,7 @@ public class JobDao extends EntityDao<Job>{
 				.setParameter("limit", limit)
 				.setParameter("offset", (page - 1) * limit);
 		List<Job> jobs = query.getResultList();
-		jobs = jobs.stream().filter(t -> t.getJobStatus().size() <= 1).collect(Collectors.toList());
+//		jobs = jobs.stream().filter(t -> t.getJobStatus().size() <= 1).collect(Collectors.toList());
 		return jobs;
 	}
 	
