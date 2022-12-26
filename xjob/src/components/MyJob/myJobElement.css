@@ -35,6 +35,23 @@
     background-color: #157347;
 }
 
+#myJob .jobProposal {
+    font-size: 0.7em;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
+#myJob .jobProposal.proposal {
+    background-color: #5C636A;
+}
+
+#myJob .jobProposal.hired {
+    background-color: #31D2F2;
+}
+
 #myJob .info {
     font-size: 0.8em;
     color: #767c73;

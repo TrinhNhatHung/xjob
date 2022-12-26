@@ -15,6 +15,14 @@ function MyJobElement(props) {
     }
   }
 
+  const renderProposal = ()=> {
+    if (props.job.proposalKind === "1"){
+      return <span className="jobProposal proposal">PROPOSAL</span>
+    } else if (props.job.proposalKind === "2"){
+      return <span className="jobProposal hired">HIRED</span>
+    }
+  }
+
   return (
     <div id="myJob" className="d-flex flex-column align-items-start">
       <span className="postTitle">{props.job.title}</span>
@@ -29,9 +37,14 @@ function MyJobElement(props) {
             })
         }
       </div>
-      {
-        renderStatus()
-      }
+      <div className='d-flex'>
+        {
+          renderStatus()
+        }
+        {
+          renderProposal()
+        }
+      </div>
     </div>
   );
 }

@@ -271,7 +271,7 @@ public class JobApi {
 		String uid = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try {
 			List<Job> jobs = jobService.getFreelancerJob(uid);
-			List<Map<String, Object>> data = jobResponse.responseJobList(jobs);
+			List<Map<String, Object>> data = jobResponse.responseMyJobList(jobs, uid);
 			Map<String, Object> result = new HashMap<>();
 			result.put("jobs", data);
 			return new ResponseEntity<Object>(result, HttpStatus.OK);
